@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
+/*
+ * Dark mode is driven by the `data-theme` attribute that the root layout sets
+ * from a cookie during SSR — not by `prefers-color-scheme` and not by a class.
+ * Registering it as a custom variant means `dark:` utilities keep working
+ * alongside the custom properties below.
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Semantic tokens. Components reference meaning ("surface", "content") rather
+ * than appearance ("white", "gray-900"), so a theme change is confined to this
+ * file.
+ *
+ * Light doubles as the fallback when the cookie is absent.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --surface: #ffffff;
+  --surface-muted: #f5f6f8;
+  --surface-raised: #ffffff;
+  --content: #10151c;
+  --content-muted: #5b6672;
+  --line: #e2e6eb;
+  --accent: #e8590c;
+  --accent-content: #ffffff;
+  --positive: #157f3d;
+  --caution: #a65a00;
+  --negative: #b42318;
 }
 
+[data-theme="dark"] {
+  --surface: #0b0f17;
+  --surface-muted: #121823;
+  --surface-raised: #161e2b;
+  --content: #e8edf4;
+  --content-muted: #94a2b3;
+  --line: #243041;
+  --accent: #ff7a2f;
+  --accent-content: #16100a;
+  --positive: #3ec177;
+  --caution: #e0a33c;
+  --negative: #f2645a;
+}
+
+/*
+ * `inline` resolves these at build time into Tailwind's color namespace, which
+ * generates utilities like `bg-surface`, `text-content` and `border-line`.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-raised: var(--surface-raised);
+  --color-content: var(--content);
+  --color-content-muted: var(--content-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-content: var(--accent-content);
+  --color-positive: var(--positive);
+  --color-caution: var(--caution);
+  --color-negative: var(--negative);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+body {
+  background-color: var(--surface);
+  color: var(--content);
+}
+
+/* Ease the theme flip, but respect a reduced-motion preference. */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Visible, consistent focus ring for keyboard users across both themes. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
