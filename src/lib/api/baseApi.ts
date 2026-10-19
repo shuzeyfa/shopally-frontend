@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
+import { getSession } from "next-auth/react";
+
 import type { ApiErrorResponse, Envelope } from "@/types/api";
 
 /**
@@ -9,7 +11,22 @@ import type { ApiErrorResponse, Envelope } from "@/types/api";
  */
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
-const rawBaseQuery = fetchBaseQuery({ baseUrl: API_URL });
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: API_URL,
+  prepareHeaders: async (headers) => {
+    if (typeof window !== "undefined") {
+      try {
+        const session = await getSession();
+        if (session?.apiToken) {
+          headers.set("Authorization", `Bearer ${session.apiToken}`);
+        }
+      } catch {
+        // Fall back gracefully if session is unreadable
+      }
+    }
+    return headers;
+  },
+});
 
 /** Codes this layer raises itself, for failures that never reached the API. */
 export const TRANSPORT_ERROR_CODES = {

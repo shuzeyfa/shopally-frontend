@@ -1,3 +1,4 @@
+import { AuthProvider } from "./AuthProvider";
 import { LanguageProvider } from "./LanguageProvider";
 import { StoreProvider } from "./StoreProvider";
 import { ThemeProvider } from "./ThemeProvider";
@@ -20,12 +21,14 @@ export function Providers({
   children: React.ReactNode;
 }) {
   return (
-    <StoreProvider>
-      <ThemeProvider initialTheme={initialTheme}>
-        <LanguageProvider initialLocale={initialLocale}>
-          {children}
-        </LanguageProvider>
-      </ThemeProvider>
-    </StoreProvider>
+    <AuthProvider>
+      <StoreProvider>
+        <ThemeProvider initialTheme={initialTheme}>
+          <LanguageProvider initialLocale={initialLocale}>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
+      </StoreProvider>
+    </AuthProvider>
   );
 }

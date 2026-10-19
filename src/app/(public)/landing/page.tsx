@@ -23,12 +23,20 @@ export default function LandingPage() {
       <p className="max-w-prose text-lg text-content-muted">
         {dict.app.tagline}
       </p>
-      <Link
-        href="/search"
-        className={buttonClasses({ variant: "primary", className: "mt-2" })}
-      >
-        {dict.nav.search}
-      </Link>
+      <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
+        <Link
+          href="/search"
+          className={buttonClasses({ variant: "primary" })}
+        >
+          {dict.nav.search}
+        </Link>
+        <Link
+          href="/login"
+          className={buttonClasses({ variant: "outline" })}
+        >
+          {dict.auth.signIn}
+        </Link>
+      </div>
     </main>
   );
 }
