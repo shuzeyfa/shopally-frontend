@@ -18,6 +18,7 @@ export const API_ERROR_CODES = [
   "FORBIDDEN",
   "NOT_FOUND",
   "FX_UNAVAILABLE",
+  "SERVICE_UNAVAILABLE",
   "INTERNAL_SERVER_ERROR",
 ] as const;
 

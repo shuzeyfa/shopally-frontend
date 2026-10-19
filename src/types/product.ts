@@ -29,6 +29,11 @@ export interface Product {
   deeplinkUrl: string;
 }
 
+export interface SavedItem {
+  product: Product;
+  savedAt: string;
+}
+
 /** Payload of GET /api/v1/search. */
 export interface SearchResult {
   products: Product[];

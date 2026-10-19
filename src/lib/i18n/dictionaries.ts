@@ -71,6 +71,15 @@ const en = {
     bestValue: "Best Value",
     highestRating: "Highest Rating",
   },
+  savedItems: {
+    subtitle: "Keep products you are considering in one place, across your devices.",
+    emptyTitle: "No saved products yet",
+    emptySubtitle: "Save products from search results and they will appear here.",
+    save: "Save product",
+    remove: "Remove saved product",
+    errorTitle: "Saved items could not be loaded",
+    errorMessage: "Check your connection and try again.",
+  },
   actions: {
     toggleTheme: "Switch theme",
     toggleLanguage: "Switch language",
@@ -244,6 +253,15 @@ const am: Dictionary = {
     maxReached: "እስከ 4 ዕቃዎች ብቻ ማወዳደር ይቻላል",
     bestValue: "ምርጥ ዋጋ",
     highestRating: "ከፍተኛ ደረጃ",
+  },
+  savedItems: {
+    subtitle: "ሊገዙዋቸው ያሰቡዋቸውን ምርቶች በአንድ ቦታ ላይ ያስቀምጡ።",
+    emptyTitle: "እስካሁን የተቀመጡ ምርቶች የሉም",
+    emptySubtitle: "ከፍለጋ ውጤቶች ምርቶችን ያስቀምጡ፤ እዚህ ይታያሉ።",
+    save: "ምርት አስቀምጥ",
+    remove: "ከተቀመጡ አስወግድ",
+    errorTitle: "የተቀመጡ ምርቶችን ማምጣት አልተቻለም",
+    errorMessage: "ግንኙነትዎን ፈትሸው እንደገና ይሞክሩ።",
   },
   actions: {
     toggleTheme: "ገጽታ ይቀይሩ",

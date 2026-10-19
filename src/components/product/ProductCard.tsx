@@ -8,6 +8,11 @@ import { PriceTag } from "./PriceTag";
 import { useDictionary } from "@/providers/LanguageProvider";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { toggleCompareProduct } from "@/lib/slices/compareSlice";
+import {
+  useGetSavedItemsQuery,
+  useRemoveSavedProductMutation,
+  useSaveProductMutation,
+} from "@/lib/api/savedApi";
 import { cn } from "@/lib/cn";
 import type { Product } from "@/types/product";
 
@@ -23,6 +28,10 @@ export function ProductCard({ product }: ProductCardProps) {
   const selectedProductIds = useAppSelector((state) => state.compare.selectedProductIds);
   const isCompared = selectedProductIds.includes(product.id);
   const isMaxReached = selectedProductIds.length >= 4 && !isCompared;
+  const { data: savedItems = [] } = useGetSavedItemsQuery();
+  const [saveProduct, { isLoading: isSaving }] = useSaveProductMutation();
+  const [removeSavedProduct, { isLoading: isRemoving }] = useRemoveSavedProductMutation();
+  const isSaved = savedItems.some((item) => item.product.id === product.id);
 
   const handleCompareClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -80,6 +89,28 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="absolute top-2.5 right-2.5 z-10">
           <AIMatchBadge percentage={product.aiMatchPercentage} />
         </div>
+
+        <button
+          type="button"
+          aria-label={isSaved ? dict.savedItems.remove : dict.savedItems.save}
+          aria-pressed={isSaved}
+          title={isSaved ? dict.savedItems.remove : dict.savedItems.save}
+          disabled={isSaving || isRemoving}
+          onClick={() => {
+            if (isSaved) void removeSavedProduct(product.id);
+            else void saveProduct(product);
+          }}
+          className={cn(
+            "absolute right-2.5 top-11 z-10 flex h-9 w-9 items-center justify-center rounded-full border shadow-sm backdrop-blur-xs transition-colors disabled:opacity-60",
+            isSaved
+              ? "border-accent bg-accent text-accent-content"
+              : "border-line bg-surface-raised/90 text-content hover:border-accent hover:text-accent",
+          )}
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill={isSaved ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 00-.1-7.8z" />
+          </svg>
+        </button>
       </div>
 
       {/* Card Content */}
