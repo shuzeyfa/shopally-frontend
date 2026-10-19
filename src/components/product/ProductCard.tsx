@@ -1,0 +1,113 @@
+"use client";
+
+import { useState } from "react";
+import { Card } from "@/components/ui/Card";
+import { buttonClasses } from "@/components/ui/Button";
+import { AIMatchBadge } from "./AIMatchBadge";
+import { PriceTag } from "./PriceTag";
+import { useDictionary } from "@/providers/LanguageProvider";
+import type { Product } from "@/types/product";
+
+interface ProductCardProps {
+  product: Product;
+}
+
+export function ProductCard({ product }: ProductCardProps) {
+  const dict = useDictionary();
+  const [imageError, setImageError] = useState(false);
+
+  return (
+    <Card className="flex flex-col justify-between overflow-hidden border border-line bg-surface-raised p-0 transition-all hover:border-accent/40 hover:shadow-md">
+      {/* Product Image Header with AI Match Badge */}
+      <div className="relative aspect-video w-full overflow-hidden bg-surface-muted border-b border-line">
+        {!imageError && product.imageUrl ? (
+          // Standard img used to support arbitrary external AliExpress CDN hosts without next.config domain restrictions
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={product.imageUrl}
+            alt={product.title}
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+            onError={() => setImageError(true)}
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center text-content-muted">
+            <svg className="h-10 w-10 stroke-current opacity-40" fill="none" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="mt-1 text-xs font-medium">AliExpress Product</span>
+          </div>
+        )}
+
+        <div className="absolute top-2.5 right-2.5">
+          <AIMatchBadge percentage={product.aiMatchPercentage} />
+        </div>
+      </div>
+
+      {/* Card Content */}
+      <div className="flex flex-1 flex-col p-4">
+        {/* Title */}
+        <h3
+          className="line-clamp-2 text-sm font-semibold text-content leading-snug"
+          title={product.title}
+        >
+          {product.title}
+        </h3>
+
+        {/* Rating and Seller Score */}
+        <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-content-muted">
+          <span className="flex items-center text-accent font-semibold">
+            ★ {product.productRating.toFixed(1)}
+          </span>
+          <span>•</span>
+          <span className="text-positive font-medium">
+            {product.sellerScore}% {dict.search.sellerScore}
+          </span>
+        </div>
+
+        {/* Delivery estimate */}
+        {product.deliveryEstimate && (
+          <div className="mt-1.5 flex items-center gap-1.5 text-xs text-content-muted">
+            <svg className="h-3.5 w-3.5 shrink-0 text-content-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+            <span className="truncate">{dict.search.delivery}: {product.deliveryEstimate}</span>
+          </div>
+        )}
+
+        {/* Summary Bullets */}
+        {product.summaryBullets && product.summaryBullets.length > 0 && (
+          <ul className="mt-3 space-y-1 border-t border-line/60 pt-2 text-xs text-content-muted">
+            {product.summaryBullets.slice(0, 2).map((bullet, idx) => (
+              <li key={idx} className="flex items-start gap-1.5">
+                <span className="text-accent mt-0.5">•</span>
+                <span className="line-clamp-1">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Price & Action */}
+        <div className="mt-4 pt-3 border-t border-line flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+          <PriceTag price={product.price} size="sm" />
+
+          <a
+            href={product.deeplinkUrl || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClasses({
+              variant: "outline",
+              size: "sm",
+              className: "w-full sm:w-auto text-xs font-semibold hover:border-accent hover:text-accent gap-1.5",
+            })}
+          >
+            <span>{dict.search.viewOnAliExpress}</span>
+            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </Card>
+  );
+}
