@@ -1,42 +1,21 @@
-"use client";
-
-import Link from "next/link";
-
-import { buttonClasses } from "@/components/ui/Button";
-import { useDictionary } from "@/providers/LanguageProvider";
+import { Hero } from "@/components/landing/Hero";
+import { Features } from "@/components/landing/Features";
+import { HowItWorks } from "@/components/landing/HowItWorks";
+import { CTA } from "@/components/landing/CTA";
 
 /**
- * Minimal public entry point.
+ * Public marketing landing page.
  *
- * Intentionally sparse: the full landing page — hero, feature grid,
- * how-it-works, CTA and social footer — is built in Phase 3. This exists so
- * the (public) route group, theming and translation are verifiable now.
+ * Showcases the hero banner, core feature grid, 3-step walkthrough,
+ * and bottom call to action. Fully internationalized and themed.
  */
 export default function LandingPage() {
-  const dict = useDictionary();
-
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-6 px-4 py-20 text-center">
-      <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-        {dict.app.name}
-      </h1>
-      <p className="max-w-prose text-lg text-content-muted">
-        {dict.app.tagline}
-      </p>
-      <div className="flex flex-wrap items-center justify-center gap-3 mt-2">
-        <Link
-          href="/search"
-          className={buttonClasses({ variant: "primary" })}
-        >
-          {dict.nav.search}
-        </Link>
-        <Link
-          href="/login"
-          className={buttonClasses({ variant: "outline" })}
-        >
-          {dict.auth.signIn}
-        </Link>
-      </div>
-    </main>
+    <div className="flex w-full flex-col">
+      <Hero />
+      <Features />
+      <HowItWorks />
+      <CTA />
+    </div>
   );
 }
