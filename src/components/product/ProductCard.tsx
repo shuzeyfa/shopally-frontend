@@ -6,6 +6,9 @@ import { buttonClasses } from "@/components/ui/Button";
 import { AIMatchBadge } from "./AIMatchBadge";
 import { PriceTag } from "./PriceTag";
 import { useDictionary } from "@/providers/LanguageProvider";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { toggleCompareProduct } from "@/lib/slices/compareSlice";
+import { cn } from "@/lib/cn";
 import type { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -16,9 +19,22 @@ export function ProductCard({ product }: ProductCardProps) {
   const dict = useDictionary();
   const [imageError, setImageError] = useState(false);
 
+  const dispatch = useAppDispatch();
+  const selectedProductIds = useAppSelector((state) => state.compare.selectedProductIds);
+  const isCompared = selectedProductIds.includes(product.id);
+  const isMaxReached = selectedProductIds.length >= 4 && !isCompared;
+
+  const handleCompareClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isMaxReached) {
+      dispatch(toggleCompareProduct(product.id));
+    }
+  };
+
   return (
     <Card className="flex flex-col justify-between overflow-hidden border border-line bg-surface-raised p-0 transition-all hover:border-accent/40 hover:shadow-md">
-      {/* Product Image Header with AI Match Badge */}
+      {/* Product Image Header with AI Match Badge & Compare Button */}
       <div className="relative aspect-video w-full overflow-hidden bg-surface-muted border-b border-line">
         {!imageError && product.imageUrl ? (
           // Standard img used to support arbitrary external AliExpress CDN hosts without next.config domain restrictions
@@ -39,7 +55,29 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
         )}
 
-        <div className="absolute top-2.5 right-2.5">
+        {/* Top-Left: Compare Selector */}
+        <div className="absolute top-2.5 left-2.5 z-10">
+          <button
+            type="button"
+            onClick={handleCompareClick}
+            disabled={isMaxReached}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium transition-all shadow-xs cursor-pointer",
+              isCompared
+                ? "bg-accent text-accent-content font-semibold"
+                : isMaxReached
+                ? "bg-surface-raised/80 text-content-muted opacity-60 cursor-not-allowed"
+                : "bg-surface-raised/90 text-content border border-line hover:border-accent hover:text-accent backdrop-blur-xs",
+            )}
+            title={isMaxReached ? dict.compare.maxReached : dict.compare.addToCompare}
+          >
+            <span>{isCompared ? "✓" : "+"}</span>
+            <span>{isCompared ? dict.compare.compared : dict.compare.addToCompare}</span>
+          </button>
+        </div>
+
+        {/* Top-Right: AI Match Badge */}
+        <div className="absolute top-2.5 right-2.5 z-10">
           <AIMatchBadge percentage={product.aiMatchPercentage} />
         </div>
       </div>

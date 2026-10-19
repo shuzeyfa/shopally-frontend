@@ -32,4 +32,18 @@ export interface Product {
 /** Payload of GET /api/v1/search. */
 export interface SearchResult {
   products: Product[];
+  total?: number;
+}
+
+/** A single attribute comparison row across multiple products. */
+export interface AttributeComparison {
+  key: string;
+  label: string;
+  values: Record<string, string>;
+}
+
+/** Payload of POST /api/v1/compare. */
+export interface CompareResult {
+  products: Product[];
+  attributes: AttributeComparison[];
 }

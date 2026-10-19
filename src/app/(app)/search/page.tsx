@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ProductGrid } from "@/components/product/ProductGrid";
+import { CompareBar } from "@/components/product/CompareBar";
 import { useSearchProductsQuery } from "@/lib/api/searchApi";
 import { useGetFXRateQuery } from "@/lib/api/fxApi";
 import { useDictionary } from "@/providers/LanguageProvider";
@@ -168,6 +169,9 @@ export default function SearchPage() {
       ) : (
         <ProductGrid products={data?.products} />
       )}
+
+      {/* Floating comparison bar */}
+      <CompareBar />
     </div>
   );
 }
