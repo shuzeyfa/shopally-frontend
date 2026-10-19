@@ -11,11 +11,15 @@ export interface Alert {
   userId: string;
   productId: string;
   targetPrice: number;
+  currency: "ETB" | "USD";
   isActive: boolean;
+  triggeredAt?: string;
+  triggeredPrice?: number;
 }
 
 /** Body of POST /api/v1/alerts. */
 export interface CreateAlertPayload {
   productId: string;
   targetPrice: number;
+  currency: "ETB" | "USD";
 }

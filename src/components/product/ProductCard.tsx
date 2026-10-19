@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { buttonClasses } from "@/components/ui/Button";
 import { AIMatchBadge } from "./AIMatchBadge";
 import { PriceTag } from "./PriceTag";
+import { PriceAlertControl } from "./PriceAlertControl";
 import { useDictionary } from "@/providers/LanguageProvider";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { toggleCompareProduct } from "@/lib/slices/compareSlice";
@@ -176,6 +177,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </svg>
           </a>
         </div>
+        <PriceAlertControl product={product} />
       </div>
     </Card>
   );
