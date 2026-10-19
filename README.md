@@ -22,6 +22,32 @@ docker compose up -d
 go run ./cmd/api
 ```
 
+## Deploy
+
+Connect this repository to Vercel and keep the project root at the repository
+root; Vercel detects the Next.js app automatically. Set these Production
+environment variables in the Vercel project settings before deploying:
+
+| Variable | Value |
+|---|---|
+| `NEXT_PUBLIC_API_URL` | The backend origin, such as `https://shopally-api.onrender.com` (no path or trailing slash) |
+| `NEXTAUTH_URL` | The production Vercel origin, such as `https://shopally.example.com` |
+| `NEXTAUTH_SECRET` | A new random secret; generate with `openssl rand -base64 32` |
+| `AUTH_JWT_SECRET` | The same dedicated token-signing secret configured on the backend |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Google OAuth web client credentials |
+
+Add `https://<your-production-domain>/api/auth/callback/google` as an
+authorized redirect URI in the Google OAuth client. Configure the backend's
+`CORS_ALLOWED_ORIGINS` to the exact frontend origin. Preview domains must also
+be explicitly allowlisted before they can call the API.
+
+The backend repository includes a Render Blueprint and multi-target Docker
+image. Create its web service and worker, then provide the MongoDB Atlas URI,
+Upstash Redis host/port/password, and the matching JWT signing secret when the
+Blueprint prompts for them. The worker uses a paid Render Starter plan in the
+Blueprint; review the selected plan and account billing before provisioning.
+Deployment is not triggered by this repository configuration.
+
 ## Architecture
 
 ```
@@ -98,8 +124,10 @@ npm run build
 npm run lint
 ```
 
-## Not built yet
+## Current status
 
-Auth (NextAuth + Google), the full landing page, search, compare, saved items
-and alerts. The `(app)` routes are placeholders and **nothing is access-gated**
-— route protection arrives with auth.
+The app includes Google/demo auth, landing, search, compare, saved items, price
+alerts, and a profile page with account totals and persisted theme/language
+preferences. The real AliExpress and LLM integrations remain mock-first. The
+backend's `render.yaml` prepares the hosted API and worker services, but you
+must connect accounts, enter provider credentials, and initiate each deploy.
