@@ -1,0 +1,2017 @@
+{
+ "note": "CSS animations are in styles.css (their @keyframes are listed here too). `animations` says which element runs which; `scripted` are element.animate() calls with real keyframes; `players` are videos and Lottie/Rive players with the file they load; `recorded` are what the page's scripts wrote frame by frame while it loaded and was scrolled (one track per element and property, samples are [ms, value, scrollY]: replay them with the same timing); `classChanges` are classes scripts added or removed, with when and at what scroll; `films` are pictures of each moving thing over one cycle (look at them); `states` picture controls at rest, on hover and on focus; `scrollReveals` are elements the page's scripts watch as they scroll into view (their classes are as they ended up: write a small IntersectionObserver that adds the class the stylesheet keys on).",
+ "keyframes": [
+  {
+   "name": "spin",
+   "css": "@keyframes spin { \n  100% { transform: rotate(1turn); }\n}"
+  },
+  {
+   "name": "pulse",
+   "css": "@keyframes pulse { \n  50% { opacity: 0.5; }\n}"
+  }
+ ],
+ "animations": [],
+ "scripted": [
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.w-full.py-20:nth-of-type(6) > h1.text-3xl.font-bold",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 6
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.w-full.py-20:nth-of-type(6) > p.text-lg.mb-8",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 300,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 6
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > header.flex.justify-between > div.flex.items-center",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 0
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.flex.flex-col-reverse:nth-of-type(1) > div.space-y-4:nth-of-type(1)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 1
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > h2.text-3xl.font-bold",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > p.mb-12.text-lg",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 100,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(1)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 200,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(2)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 300.00000000000006,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(3)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 400,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(4)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 500,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(5)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 600.0000000000001,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(6)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 700.0000000000001,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(7)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 800,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(8)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 900,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(9)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 1000,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(10)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 1100,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(11)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 1200.0000000000002,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6 > div.bg-white.p-8:nth-of-type(12)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 1300,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 2
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#demo:nth-of-type(4) > div > h2.text-2xl.font-bold",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 4
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#demo:nth-of-type(4) > div > p.mb-8.text-gray-600",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 4
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#demo:nth-of-type(4) > div > div.max-w-5xl.mx-auto",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 4
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > footer.px-6.py-10 > div.grid.grid-cols-1 > div:nth-of-type(1)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 7
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > footer.px-6.py-10 > div.grid.grid-cols-1 > div:nth-of-type(2)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 7
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > footer.px-6.py-10 > div.grid.grid-cols-1 > div:nth-of-type(3)",
+   "keyframes": [
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "0",
+     "computedOffset": 0
+    },
+    {
+     "offset": null,
+     "easing": "linear",
+     "composite": "auto",
+     "opacity": "1",
+     "computedOffset": 1
+    }
+   ],
+   "duration": 600,
+   "delay": 0,
+   "easing": "ease-out",
+   "iterations": 1,
+   "section": 7
+  }
+ ],
+ "players": [
+  {
+   "kind": "video",
+   "src": "assets/media/009-shop.mp4",
+   "poster": null,
+   "path": "section#demo:nth-of-type(4) > div > div.max-w-5xl.mx-auto > div.relative.w-full:nth-of-type(2) > video.absolute.inset-0",
+   "section": 4
+  }
+ ],
+ "scrollReveals": [
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > header.flex.justify-between > div.flex.items-center",
+   "classes": "flex items-center justify-center lg:justify-start gap-2 font-bold text-xl",
+   "transition": "all",
+   "section": 0
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.flex.flex-col-reverse:nth-of-type(1) > div.space-y-4:nth-of-type(1)",
+   "classes": "md:w-1/2 space-y-4",
+   "transition": "all",
+   "section": 1
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#features:nth-of-type(2) > div.max-w-7xl.mx-auto",
+   "classes": "max-w-7xl mx-auto text-center",
+   "transition": "all",
+   "section": 2
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#demo:nth-of-type(4) > div",
+   "classes": "",
+   "transition": "all",
+   "section": 4
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > footer.px-6.py-10 > div.grid.grid-cols-1",
+   "classes": "grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto",
+   "transition": "all",
+   "section": 7
+  },
+  {
+   "path": "section#demo:nth-of-type(4) > div > div.max-w-5xl.mx-auto > div.relative.w-full:nth-of-type(2) > video.absolute.inset-0",
+   "classes": "absolute inset-0 w-full h-full object-contain rounded-lg",
+   "transition": "all",
+   "section": 4
+  }
+ ],
+ "recorded": [
+  {
+   "path": "main.scroll-smooth > section.flex.flex-col-reverse:nth-of-type(1) > div.space-y-4:nth-of-type(1) > div.flex.gap-4 > button.text-black.px-6:nth-of-type(1)",
+   "tag": "button",
+   "property": "transform",
+   "samples": [
+    [
+     0,
+     "none",
+     0
+    ],
+    [
+     40,
+     "translateY(-0.813075px)",
+     0
+    ],
+    [
+     1510,
+     "translateY(-0.316379px)",
+     1440
+    ],
+    [
+     2699,
+     "translateY(2.64718px)",
+     0
+    ],
+    [
+     3265,
+     "translateY(-3.57288px)",
+     0
+    ],
+    [
+     3421,
+     "translateY(-3.07604px)",
+     0
+    ],
+    [
+     3563,
+     "translateY(-1.15562px)",
+     0
+    ],
+    [
+     3706,
+     "translateY(-0.0632336px)",
+     0
+    ],
+    [
+     3909,
+     "translateY(2.4949px)",
+     0
+    ],
+    [
+     4039,
+     "translateY(3.73212px)",
+     0
+    ],
+    [
+     4174,
+     "translateY(3.04571px)",
+     0
+    ],
+    [
+     4314,
+     "translateY(1.15562px)",
+     0
+    ],
+    [
+     4449,
+     "translateY(0.0886801px)",
+     0
+    ],
+    [
+     4572,
+     "translateY(-1.325px)",
+     0
+    ],
+    [
+     4778,
+     "translateY(-3.65983px)",
+     0
+    ],
+    [
+     4915,
+     "translateY(-3.17241px)",
+     0
+    ],
+    [
+     5055,
+     "translateY(-1.24507px)",
+     0
+    ],
+    [
+     5185,
+     "translateY(-0.150107px)",
+     0
+    ],
+    [
+     5320,
+     "translateY(1.29454px)",
+     0
+    ],
+    [
+     5547,
+     "translateY(3.77996px)",
+     0
+    ],
+    [
+     5669,
+     "translateY(3.12342px)",
+     0
+    ],
+    [
+     5793,
+     "translateY(1.38358px)",
+     0
+    ],
+    [
+     5938,
+     "translateY(0.135955px)",
+     0
+    ],
+    [
+     6064,
+     "translateY(-1.18795px)",
+     0
+    ],
+    [
+     6249,
+     "translateY(-3.43644px)",
+     0
+    ],
+    [
+     6374,
+     "translateY(-3.87424px)",
+     0
+    ],
+    [
+     6500,
+     "translateY(-1.95166px)",
+     0
+    ],
+    [
+     6633,
+     "translateY(-0.489478px)",
+     0
+    ],
+    [
+     6772,
+     "translateY(0.517806px)",
+     0
+    ],
+    [
+     6982,
+     "translateY(3.29524px)",
+     0
+    ],
+    [
+     7114,
+     "translateY(3.99955px)",
+     0
+    ],
+    [
+     7249,
+     "translateY(1.95166px)",
+     0
+    ],
+    [
+     7385,
+     "translateY(0.473572px)",
+     0
+    ],
+    [
+     7518,
+     "translateY(-0.467662px)",
+     0
+    ],
+    [
+     7718,
+     "translateY(-3.16025px)",
+     0
+    ],
+    [
+     7842,
+     "translateY(-3.97094px)",
+     0
+    ],
+    [
+     7966,
+     "translateY(-2.39753px)",
+     0
+    ],
+    [
+     8154,
+     "translateY(-0.333302px)",
+     0
+    ],
+    [
+     8305,
+     "translateY(1.04965px)",
+     0
+    ],
+    [
+     8393,
+     "translateY(2.30799px)",
+     0
+    ],
+    [
+     8585,
+     "translateY(3.94979px)",
+     0
+    ],
+    [
+     8723,
+     "translateY(2.31089px)",
+     0
+    ],
+    [
+     8835,
+     "translateY(0.928993px)",
+     0
+    ],
+    [
+     8959,
+     "translateY(0.0531479px)",
+     0
+    ],
+    [
+     9098,
+     "translateY(-1.68911px)",
+     0
+    ],
+    [
+     9290,
+     "translateY(-3.73832px)",
+     0
+    ],
+    [
+     9426,
+     "translateY(-3.09109px)",
+     0
+    ],
+    [
+     9560,
+     "translateY(-1.18795px)",
+     0
+    ]
+   ],
+   "changes": 104,
+   "startMs": 3485,
+   "durationMs": 9560,
+   "trigger": "load",
+   "section": 1
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.flex.flex-col-reverse:nth-of-type(1) > div:nth-of-type(2)",
+   "tag": "div",
+   "property": "transform",
+   "samples": [
+    [
+     0,
+     "none",
+     0
+    ],
+    [
+     40,
+     "translateX(0.110163px)",
+     0
+    ],
+    [
+     1510,
+     "translateX(88.0122px)",
+     1440
+    ],
+    [
+     2699,
+     "translateX(73.8894px) rotate(93.9981deg)",
+     0
+    ],
+    [
+     3265,
+     "translateX(27.4908px) rotate(261.033deg)",
+     0
+    ],
+    [
+     3421,
+     "translateX(16.8788px) rotate(299.236deg)",
+     0
+    ],
+    [
+     3563,
+     "translateX(9.38527px) rotate(326.213deg)",
+     0
+    ],
+    [
+     3706,
+     "translateX(4.09087px) rotate(345.273deg)",
+     0
+    ],
+    [
+     3909,
+     "translateX(0.328132px) rotate(358.819deg)",
+     0
+    ],
+    [
+     4039,
+     "translateX(-0.10469px) rotate(359.623deg)",
+     0
+    ],
+    [
+     4174,
+     "translateX(-1.62147px) rotate(354.163deg)",
+     0
+    ],
+    [
+     4314,
+     "translateX(-5.21815px) rotate(341.215deg)",
+     0
+    ],
+    [
+     4449,
+     "translateX(-10.7255px) rotate(321.388deg)",
+     0
+    ],
+    [
+     4572,
+     "translateX(-17.5618px) rotate(296.778deg)",
+     0
+    ],
+    [
+     4778,
+     "translateX(-32.0877px) rotate(244.484deg)",
+     0
+    ],
+    [
+     4915,
+     "translateX(-43.4615px) rotate(203.539deg)",
+     0
+    ],
+    [
+     5055,
+     "translateX(-55.5198px) rotate(160.129deg)",
+     0
+    ],
+    [
+     5185,
+     "translateX(-66.2491px) rotate(121.503deg)",
+     0
+    ],
+    [
+     5320,
+     "translateX(-76.5229px) rotate(84.5177deg)",
+     0
+    ],
+    [
+     5547,
+     "translateX(-89.8379px) rotate(36.5834deg)",
+     0
+    ],
+    [
+     5669,
+     "translateX(-94.7469px) rotate(18.9113deg)",
+     0
+    ],
+    [
+     5793,
+     "translateX(-98.0584px) rotate(6.98963deg)",
+     0
+    ],
+    [
+     5938,
+     "translateX(-99.8604px) rotate(0.502512deg)",
+     0
+    ],
+    [
+     6064,
+     "translateX(-99.7517px)",
+     0
+    ],
+    [
+     6249,
+     "translateX(-96.7155px)",
+     0
+    ],
+    [
+     6374,
+     "translateX(-92.5858px)",
+     0
+    ],
+    [
+     6500,
+     "translateX(-86.6949px)",
+     0
+    ],
+    [
+     6633,
+     "translateX(-78.5782px)",
+     0
+    ],
+    [
+     6772,
+     "translateX(-68.3937px)",
+     0
+    ],
+    [
+     6982,
+     "translateX(-50.769px)",
+     0
+    ],
+    [
+     7114,
+     "translateX(-39.5585px)",
+     0
+    ],
+    [
+     7249,
+     "translateX(-28.7565px)",
+     0
+    ],
+    [
+     7385,
+     "translateX(-19.1922px)",
+     0
+    ],
+    [
+     7518,
+     "translateX(-11.5445px)",
+     0
+    ],
+    [
+     7718,
+     "translateX(-3.72258px)",
+     0
+    ],
+    [
+     7842,
+     "translateX(-1.08052px)",
+     0
+    ],
+    [
+     7966,
+     "translateX(-0.029858px)",
+     0
+    ],
+    [
+     8154,
+     "translateX(1.29175px)",
+     0
+    ],
+    [
+     8305,
+     "translateX(4.94195px)",
+     0
+    ],
+    [
+     8393,
+     "translateX(8.24719px)",
+     0
+    ],
+    [
+     8585,
+     "translateX(18.3124px)",
+     0
+    ],
+    [
+     8723,
+     "translateX(27.8224px)",
+     0
+    ],
+    [
+     8835,
+     "translateX(36.7039px)",
+     0
+    ],
+    [
+     8959,
+     "translateX(47.1815px)",
+     0
+    ],
+    [
+     9098,
+     "translateX(59.0737px)",
+     0
+    ],
+    [
+     9290,
+     "translateX(74.28px)",
+     0
+    ],
+    [
+     9426,
+     "translateX(83.0647px)",
+     0
+    ],
+    [
+     9560,
+     "translateX(90.4795px)",
+     0
+    ]
+   ],
+   "changes": 104,
+   "startMs": 3485,
+   "durationMs": 9560,
+   "trigger": "load",
+   "section": 1
+  },
+  {
+   "path": "main.scroll-smooth > section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6",
+   "tag": "div",
+   "property": "transform",
+   "samples": [
+    [
+     0,
+     "none",
+     0
+    ],
+    [
+     40,
+     "translateX(-0.06%)",
+     0
+    ],
+    [
+     1510,
+     "translateX(-1.8975%)",
+     1440
+    ],
+    [
+     2699,
+     "translateX(-3.385%)",
+     0
+    ],
+    [
+     3265,
+     "translateX(-4.0925%)",
+     0
+    ],
+    [
+     3421,
+     "translateX(-4.2875%)",
+     0
+    ],
+    [
+     3563,
+     "translateX(-4.465%)",
+     0
+    ],
+    [
+     3706,
+     "translateX(-4.6425%)",
+     0
+    ],
+    [
+     3909,
+     "translateX(-4.89625%)",
+     0
+    ],
+    [
+     4039,
+     "translateX(-5.05875%)",
+     0
+    ],
+    [
+     4174,
+     "translateX(-5.2275%)",
+     0
+    ],
+    [
+     4314,
+     "translateX(-5.4025%)",
+     0
+    ],
+    [
+     4449,
+     "translateX(-5.57125%)",
+     0
+    ],
+    [
+     4572,
+     "translateX(-5.72625%)",
+     0
+    ],
+    [
+     4778,
+     "translateX(-5.9825%)",
+     0
+    ],
+    [
+     4915,
+     "translateX(-6.155%)",
+     0
+    ],
+    [
+     5055,
+     "translateX(-6.33%)",
+     0
+    ],
+    [
+     5185,
+     "translateX(-6.49125%)",
+     0
+    ],
+    [
+     5320,
+     "translateX(-6.66125%)",
+     0
+    ],
+    [
+     5547,
+     "translateX(-6.94375%)",
+     0
+    ],
+    [
+     5669,
+     "translateX(-7.09625%)",
+     0
+    ],
+    [
+     5793,
+     "translateX(-7.2525%)",
+     0
+    ],
+    [
+     5938,
+     "translateX(-7.4325%)",
+     0
+    ],
+    [
+     6064,
+     "translateX(-7.59%)",
+     0
+    ],
+    [
+     6249,
+     "translateX(-7.82125%)",
+     0
+    ],
+    [
+     6374,
+     "translateX(-7.9775%)",
+     0
+    ],
+    [
+     6500,
+     "translateX(-8.13375%)",
+     0
+    ],
+    [
+     6633,
+     "translateX(-8.30125%)",
+     0
+    ],
+    [
+     6772,
+     "translateX(-8.475%)",
+     0
+    ],
+    [
+     6982,
+     "translateX(-8.73875%)",
+     0
+    ],
+    [
+     7114,
+     "translateX(-8.9025%)",
+     0
+    ],
+    [
+     7249,
+     "translateX(-9.07125%)",
+     0
+    ],
+    [
+     7385,
+     "translateX(-9.24125%)",
+     0
+    ],
+    [
+     7518,
+     "translateX(-9.40875%)",
+     0
+    ],
+    [
+     7718,
+     "translateX(-9.65875%)",
+     0
+    ],
+    [
+     7842,
+     "translateX(-9.81375%)",
+     0
+    ],
+    [
+     7966,
+     "translateX(-9.96875%)",
+     0
+    ],
+    [
+     8154,
+     "translateX(-10.2025%)",
+     0
+    ],
+    [
+     8305,
+     "translateX(-10.3912%)",
+     0
+    ],
+    [
+     8393,
+     "translateX(-10.5025%)",
+     0
+    ],
+    [
+     8585,
+     "translateX(-10.7413%)",
+     0
+    ],
+    [
+     8723,
+     "translateX(-10.9138%)",
+     0
+    ],
+    [
+     8835,
+     "translateX(-11.0538%)",
+     0
+    ],
+    [
+     8959,
+     "translateX(-11.2088%)",
+     0
+    ],
+    [
+     9098,
+     "translateX(-11.3825%)",
+     0
+    ],
+    [
+     9290,
+     "translateX(-11.6225%)",
+     0
+    ],
+    [
+     9426,
+     "translateX(-11.7863%)",
+     0
+    ],
+    [
+     9560,
+     "translateX(-11.9612%)",
+     0
+    ]
+   ],
+   "changes": 104,
+   "startMs": 3485,
+   "durationMs": 9560,
+   "trigger": "load",
+   "section": 2
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#testimonials:nth-of-type(5) > div.overflow-hidden:nth-of-type(2) > div.flex.gap-6",
+   "tag": "div",
+   "property": "transform",
+   "samples": [
+    [
+     0,
+     "none",
+     0
+    ],
+    [
+     40,
+     "translateX(-0.096%)",
+     0
+    ],
+    [
+     1510,
+     "translateX(-3.036%)",
+     1440
+    ],
+    [
+     2699,
+     "translateX(-5.416%)",
+     0
+    ],
+    [
+     3265,
+     "translateX(-6.548%)",
+     0
+    ],
+    [
+     3421,
+     "translateX(-6.86%)",
+     0
+    ],
+    [
+     3563,
+     "translateX(-7.144%)",
+     0
+    ],
+    [
+     3706,
+     "translateX(-7.428%)",
+     0
+    ],
+    [
+     3909,
+     "translateX(-7.834%)",
+     0
+    ],
+    [
+     4039,
+     "translateX(-8.094%)",
+     0
+    ],
+    [
+     4174,
+     "translateX(-8.364%)",
+     0
+    ],
+    [
+     4314,
+     "translateX(-8.644%)",
+     0
+    ],
+    [
+     4449,
+     "translateX(-8.914%)",
+     0
+    ],
+    [
+     4572,
+     "translateX(-9.162%)",
+     0
+    ],
+    [
+     4778,
+     "translateX(-9.572%)",
+     0
+    ],
+    [
+     4915,
+     "translateX(-9.848%)",
+     0
+    ],
+    [
+     5055,
+     "translateX(-10.128%)",
+     0
+    ],
+    [
+     5185,
+     "translateX(-10.386%)",
+     0
+    ],
+    [
+     5320,
+     "translateX(-10.658%)",
+     0
+    ],
+    [
+     5547,
+     "translateX(-11.11%)",
+     0
+    ],
+    [
+     5669,
+     "translateX(-11.354%)",
+     0
+    ],
+    [
+     5793,
+     "translateX(-11.604%)",
+     0
+    ],
+    [
+     5938,
+     "translateX(-11.892%)",
+     0
+    ],
+    [
+     6064,
+     "translateX(-12.144%)",
+     0
+    ],
+    [
+     6249,
+     "translateX(-12.514%)",
+     0
+    ],
+    [
+     6374,
+     "translateX(-12.764%)",
+     0
+    ],
+    [
+     6500,
+     "translateX(-13.014%)",
+     0
+    ],
+    [
+     6633,
+     "translateX(-13.282%)",
+     0
+    ],
+    [
+     6772,
+     "translateX(-13.56%)",
+     0
+    ],
+    [
+     6982,
+     "translateX(-13.982%)",
+     0
+    ],
+    [
+     7114,
+     "translateX(-14.244%)",
+     0
+    ],
+    [
+     7249,
+     "translateX(-14.514%)",
+     0
+    ],
+    [
+     7385,
+     "translateX(-14.786%)",
+     0
+    ],
+    [
+     7518,
+     "translateX(-15.054%)",
+     0
+    ],
+    [
+     7718,
+     "translateX(-15.454%)",
+     0
+    ],
+    [
+     7842,
+     "translateX(-15.702%)",
+     0
+    ],
+    [
+     7966,
+     "translateX(-15.95%)",
+     0
+    ],
+    [
+     8154,
+     "translateX(-16.324%)",
+     0
+    ],
+    [
+     8305,
+     "translateX(-16.626%)",
+     0
+    ],
+    [
+     8393,
+     "translateX(-16.804%)",
+     0
+    ],
+    [
+     8585,
+     "translateX(-17.186%)",
+     0
+    ],
+    [
+     8723,
+     "translateX(-17.462%)",
+     0
+    ],
+    [
+     8835,
+     "translateX(-17.686%)",
+     0
+    ],
+    [
+     8959,
+     "translateX(-17.934%)",
+     0
+    ],
+    [
+     9098,
+     "translateX(-18.212%)",
+     0
+    ],
+    [
+     9290,
+     "translateX(-18.596%)",
+     0
+    ],
+    [
+     9426,
+     "translateX(-18.858%)",
+     0
+    ],
+    [
+     9560,
+     "translateX(-19.138%)",
+     0
+    ]
+   ],
+   "changes": 104,
+   "startMs": 3485,
+   "durationMs": 9560,
+   "trigger": "load",
+   "section": 5
+  },
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > header.flex.justify-between > button.text-black.px-4",
+   "tag": "button",
+   "property": "transform",
+   "samples": [
+    [
+     0,
+     "translateY(-0.264773px)",
+     0
+    ],
+    [
+     1067,
+     "translateY(3.9036px)",
+     0
+    ],
+    [
+     2145,
+     "translateY(-0.361143px)",
+     0
+    ],
+    [
+     3137,
+     "translateY(-2.30799px)",
+     0
+    ],
+    [
+     3333,
+     "translateY(-3.96137px)",
+     0
+    ],
+    [
+     3512,
+     "translateY(-1.70361px)",
+     0
+    ],
+    [
+     3628,
+     "translateY(-0.473572px)",
+     0
+    ],
+    [
+     3764,
+     "translateY(0.467662px)",
+     0
+    ],
+    [
+     3903,
+     "translateY(2.4949px)",
+     0
+    ],
+    [
+     4106,
+     "translateY(3.99869px)",
+     0
+    ],
+    [
+     4241,
+     "translateY(1.97803px)",
+     0
+    ],
+    [
+     4368,
+     "translateY(0.563561px)",
+     0
+    ],
+    [
+     4498,
+     "translateY(-0.230153px)",
+     0
+    ],
+    [
+     4665,
+     "translateY(-2.6388px)",
+     0
+    ],
+    [
+     4772,
+     "translateY(-3.65983px)",
+     0
+    ],
+    [
+     5002,
+     "translateY(-1.83172px)",
+     0
+    ],
+    [
+     5116,
+     "translateY(-0.580565px)",
+     0
+    ],
+    [
+     5254,
+     "translateY(0.299832px)",
+     0
+    ],
+    [
+     5380,
+     "translateY(2.21788px)",
+     0
+    ],
+    [
+     5541,
+     "translateY(3.77996px)",
+     0
+    ],
+    [
+     5663,
+     "translateY(3.12342px)",
+     0
+    ],
+    [
+     5858,
+     "translateY(0.64156px)",
+     0
+    ],
+    [
+     5985,
+     "translateY(5.78e-05px)",
+     0
+    ],
+    [
+     6125,
+     "translateY(-2.15367px)",
+     0
+    ],
+    [
+     6243,
+     "translateY(-3.43644px)",
+     0
+    ],
+    [
+     6368,
+     "translateY(-3.87424px)",
+     0
+    ],
+    [
+     6494,
+     "translateY(-1.95166px)",
+     0
+    ],
+    [
+     6711,
+     "translateY(-0.0290556px)",
+     0
+    ],
+    [
+     6846,
+     "translateY(1.75882px)",
+     0
+    ],
+    [
+     6976,
+     "translateY(3.29524px)",
+     0
+    ],
+    [
+     7108,
+     "translateY(3.99955px)",
+     0
+    ],
+    [
+     7243,
+     "translateY(1.95166px)",
+     0
+    ],
+    [
+     7379,
+     "translateY(0.473572px)",
+     0
+    ],
+    [
+     7568,
+     "translateY(-1.33889px)",
+     0
+    ],
+    [
+     7712,
+     "translateY(-3.16025px)",
+     0
+    ],
+    [
+     7836,
+     "translateY(-3.97094px)",
+     0
+    ],
+    [
+     7960,
+     "translateY(-2.39753px)",
+     0
+    ],
+    [
+     8148,
+     "translateY(-0.333302px)",
+     0
+    ],
+    [
+     8299,
+     "translateY(1.04965px)",
+     0
+    ],
+    [
+     8448,
+     "translateY(3.00738px)",
+     0
+    ],
+    [
+     8579,
+     "translateY(3.94979px)",
+     0
+    ],
+    [
+     8717,
+     "translateY(2.31089px)",
+     0
+    ],
+    [
+     8829,
+     "translateY(0.928993px)",
+     0
+    ],
+    [
+     8953,
+     "translateY(0.0531479px)",
+     0
+    ],
+    [
+     9092,
+     "translateY(-1.68911px)",
+     0
+    ],
+    [
+     9284,
+     "translateY(-3.73832px)",
+     0
+    ],
+    [
+     9420,
+     "translateY(-3.09109px)",
+     0
+    ],
+    [
+     9554,
+     "translateY(-1.18795px)",
+     0
+    ]
+   ],
+   "changes": 103,
+   "startMs": 3491,
+   "durationMs": 9554,
+   "trigger": "load",
+   "section": 0
+  }
+ ],
+ "classChanges": [
+  {
+   "path": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > header.flex.justify-between > nav.hidden.gap-6 > a.transition-colors.cursor-pointer:nth-of-type(2)",
+   "added": [
+    "text-gray-700",
+    "hover:text-[#FFD300]"
+   ],
+   "removed": [
+    "text-[#FFD300]"
+   ],
+   "atMs": 5643,
+   "scrollY": 0,
+   "section": 0
+  }
+ ],
+ "films": [
+  {
+   "file": "reference/motion/films/01-scripted-section.jpg",
+   "kind": "scripted",
+   "label": "Scripted section: 2 moving parts (transform)",
+   "section": "02-section",
+   "element": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section.flex.flex-col-reverse:nth-of-type(1)",
+   "frameTimesMs": [
+    0,
+    1201,
+    2401,
+    3601,
+    4799,
+    6001
+   ]
+  },
+  {
+   "file": "reference/motion/films/02-scripted-features.jpg",
+   "kind": "scripted",
+   "label": "Scripted div: 1 moving part (transform)",
+   "section": "03-features",
+   "element": "main.scroll-smooth > section#features:nth-of-type(2) > div.max-w-7xl.mx-auto > div.overflow-hidden > div.flex.gap-6",
+   "frameTimesMs": [
+    0,
+    1200,
+    2399,
+    3600,
+    4801,
+    6001
+   ]
+  },
+  {
+   "file": "reference/motion/films/03-scripted-testimonials.jpg",
+   "kind": "scripted",
+   "label": "Scripted div: 1 moving part (transform)",
+   "section": "06-testimonials",
+   "element": "div.min-h-screen:nth-of-type(2) > main.scroll-smooth > section#testimonials:nth-of-type(5) > div.overflow-hidden:nth-of-type(2) > div.flex.gap-6",
+   "frameTimesMs": [
+    0,
+    1489,
+    2401,
+    3600,
+    4800,
+    6000
+   ]
+  },
+  {
+   "file": "reference/motion/films/05-player-demo.jpg",
+   "kind": "player",
+   "label": "Player: video",
+   "section": "05-demo",
+   "element": "section#demo:nth-of-type(4) > div > div.max-w-5xl.mx-auto > div.relative.w-full:nth-of-type(2) > video.absolute.inset-0",
+   "frameTimesMs": [
+    0,
+    600,
+    1200,
+    1800,
+    2400,
+    3000
+   ]
+  }
+ ],
+ "states": [
+  {
+   "file": "reference/components/01-nav-link.jpg",
+   "kind": "nav-link",
+   "label": "nav-link a.transition-colors.cursor-pointer:nth-of-type(1)",
+   "section": "01-header"
+  },
+  {
+   "file": "reference/components/02-nav-link.jpg",
+   "kind": "nav-link",
+   "label": "nav-link a.transition-colors.cursor-pointer:nth-of-type(2)",
+   "section": "01-header"
+  },
+  {
+   "file": "reference/components/03-button.jpg",
+   "kind": "button",
+   "label": "button button.text-black.px-4",
+   "section": "01-header"
+  },
+  {
+   "file": "reference/components/04-button.jpg",
+   "kind": "button",
+   "label": "button button.text-black.px-6:nth-of-type(1)",
+   "section": "02-section"
+  },
+  {
+   "file": "reference/components/05-card.jpg",
+   "kind": "card",
+   "label": "card div.bg-white.p-6:nth-of-type(1)",
+   "section": "06-testimonials"
+  },
+  {
+   "file": "reference/components/06-card.jpg",
+   "kind": "card",
+   "label": "card div.bg-white.p-6:nth-of-type(2)",
+   "section": "06-testimonials"
+  }
+ ],
+ "lottie": []
+}

@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { buttonClasses } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export function Hero() {
@@ -24,12 +24,20 @@ export function Hero() {
             <span>{dict.landing.hero.badge}</span>
           </div>
 
-          <h1 className="text-4xl font-extrabold tracking-tight text-content sm:text-5xl lg:text-6xl">
-            {dict.landing.hero.headline}
+          <h1 className="text-3xl font-extrabold tracking-tight text-content sm:text-5xl lg:text-6xl">
+            {dict.landing.hero.headlinePrefix}{" "}
+            <span className="text-accent">
+              {dict.landing.hero.headlineHighlight}
+            </span>
           </h1>
 
           <p className="max-w-xl text-base text-content-muted sm:text-lg">
             {dict.landing.hero.subhead}
+          </p>
+
+          <p className="text-xs sm:text-sm font-medium text-content-muted flex items-center justify-center lg:justify-start gap-1.5">
+            <span>📸</span>
+            <span>{dict.landing.hero.imageSearchBadge}</span>
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2 lg:justify-start">
@@ -38,21 +46,21 @@ export function Hero() {
               className={buttonClasses({
                 variant: "primary",
                 size: "md",
-                className: "px-6 py-3 text-base shadow-sm",
+                className: "px-7 py-3 text-base font-bold shadow-lg hover:scale-105 transition-transform",
               })}
             >
               {dict.landing.hero.startSearching}
             </Link>
-            <Link
-              href="/login"
+            <a
+              href="#demo"
               className={buttonClasses({
                 variant: "outline",
                 size: "md",
-                className: "px-6 py-3 text-base",
+                className: "px-6 py-3 text-base font-semibold",
               })}
             >
-              {dict.landing.hero.exploreDeals}
-            </Link>
+              {dict.landing.hero.watchDemo}
+            </a>
           </div>
 
           {/* Trust badges */}
@@ -72,58 +80,20 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Interactive Mock Card */}
-        <div className="w-full flex-1 max-w-md lg:max-w-none">
-          <div className="relative mx-auto max-w-md">
-            {/* Ambient accent card highlight */}
-            <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent/20 to-surface-muted blur-md -z-10" />
+        {/* Right Column: 3D Yellow Shopping Cart from Live Site */}
+        <div className="w-full flex-1 max-w-md lg:max-w-lg flex items-center justify-center">
+          <div className="relative w-full max-w-xs sm:max-w-md aspect-square flex items-center justify-center">
+            {/* Ambient accent glow */}
+            <div className="absolute inset-0 rounded-full bg-accent/15 blur-3xl -z-10 animate-pulse" />
 
-            <Card className="border border-line bg-surface-raised p-6 shadow-xl">
-              <div className="flex items-center justify-between border-b border-line pb-4">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-xs font-semibold text-accent">
-                  ★ {dict.landing.hero.mockCard.matchScore}
-                </span>
-                <span className="text-xs text-content-muted font-mono">
-                  Live FX: 1 USD = ~121.5 ETB
-                </span>
-              </div>
-
-              <div className="mt-4 space-y-4 text-left">
-                <div className="aspect-video w-full rounded-md bg-surface-muted flex items-center justify-center text-content-muted border border-line">
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-3xl">🎧</span>
-                    <span className="text-xs">AliExpress Product Preview</span>
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-content text-base leading-snug">
-                    {dict.landing.hero.mockCard.title}
-                  </h3>
-                  <div className="mt-1 flex items-center gap-2 text-xs text-content-muted">
-                    <span className="text-positive font-medium">
-                      ✓ {dict.landing.hero.mockCard.sellerScore}
-                    </span>
-                    <span>•</span>
-                    <span>{dict.landing.hero.mockCard.delivery}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-baseline justify-between rounded-md bg-surface-muted p-3 border border-line">
-                  <div>
-                    <div className="text-xs text-content-muted uppercase tracking-wider font-semibold">
-                      Estimated Total
-                    </div>
-                    <div className="text-xl font-bold text-content">
-                      {dict.landing.hero.mockCard.etbPrice}
-                    </div>
-                  </div>
-                  <div className="text-sm font-medium text-content-muted">
-                    {dict.landing.hero.mockCard.usdPrice}
-                  </div>
-                </div>
-              </div>
-            </Card>
+            <Image
+              src="/landing/cart.png"
+              alt="ShopAlly 3D Shopping Cart"
+              width={480}
+              height={480}
+              priority
+              className="w-full h-auto object-contain drop-shadow-[0_20px_35px_rgba(255,211,0,0.25)] hover:scale-105 transition-transform duration-500"
+            />
           </div>
         </div>
       </div>

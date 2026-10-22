@@ -69,10 +69,13 @@ export function SigninForm() {
   return (
     <Card className="w-full max-w-md p-6 sm:p-8">
       <div className="mb-6 text-center">
-        <Link href="/" className="inline-block text-2xl font-bold tracking-tight text-accent">
-          {dict.app.name}
+        <Link href="/" className="inline-flex items-center gap-2.5 text-2xl font-bold tracking-tight text-content">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-content font-black text-base shadow-xs">
+            ⚡
+          </div>
+          <span>{dict.app.name}</span>
         </Link>
-        <h1 className="mt-3 text-xl font-semibold tracking-tight text-content">
+        <h1 className="mt-4 text-xl font-semibold tracking-tight text-content">
           {dict.auth.welcomeTitle}
         </h1>
         <p className="mt-1 text-sm text-content-muted">

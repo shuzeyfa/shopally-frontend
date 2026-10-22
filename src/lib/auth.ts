@@ -1,4 +1,5 @@
 import { SignJWT } from "jose";
+import { createHash } from "crypto";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -9,12 +10,19 @@ const TOKEN_AUDIENCE = "shopally-api";
 /**
  * Returns the secret used to sign the API JWT for the Go backend.
  * Must match the backend's AUTH_JWT_SECRET (at least 32 characters).
+ *
+ * Throws at startup if neither AUTH_JWT_SECRET nor NEXTAUTH_SECRET is set
+ * so that a misconfigured deployment fails loudly rather than silently
+ * using a public fallback that attackers could exploit.
  */
 function getApiJwtSecret(): Uint8Array {
-  const secret =
-    process.env.AUTH_JWT_SECRET ??
-    process.env.NEXTAUTH_SECRET ??
-    "development-jwt-secret-minimum-32-chars-key-shopally";
+  const secret = process.env.AUTH_JWT_SECRET ?? process.env.NEXTAUTH_SECRET;
+  if (!secret) {
+    throw new Error(
+      "AUTH_JWT_SECRET (or NEXTAUTH_SECRET) must be set. " +
+        "Generate one with: openssl rand -base64 32"
+    );
+  }
   return new TextEncoder().encode(secret);
 }
 
@@ -64,7 +72,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
         return {
-          id: `demo-${Buffer.from(credentials.email).toString("hex").slice(0, 12)}`,
+          id: `demo-${createHash("sha256").update(credentials.email).digest("hex").slice(0, 24)}`,
           email: credentials.email,
           name: credentials.name || "Demo Shopper",
         };

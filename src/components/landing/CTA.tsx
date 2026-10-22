@@ -1,29 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { buttonClasses } from "@/components/ui/Button";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export function CTA() {
   const dict = useDictionary();
 
   return (
-    <section className="relative overflow-hidden border-t border-line bg-gradient-to-b from-surface to-surface-muted/60 py-16 sm:py-20">
-      <div className="mx-auto max-w-4xl px-4 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-content sm:text-4xl">
+    <section className="relative w-full overflow-hidden bg-accent py-20 sm:py-28 text-center text-accent-content">
+      <div className="mx-auto max-w-4xl px-4">
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tight mb-4 text-[#111827]">
           {dict.landing.cta.title}
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-content-muted sm:text-lg">
+        <p className="mx-auto max-w-2xl text-base sm:text-lg font-medium text-[#111827]/80 mb-8">
           {dict.landing.cta.subtitle}
         </p>
-        <div className="mt-8 flex justify-center gap-4">
+        <div className="flex justify-center">
           <Link
             href="/search"
-            className={buttonClasses({
-              variant: "primary",
-              size: "md",
-              className: "px-8 py-3.5 text-base shadow-md font-semibold",
-            })}
+            className="inline-flex items-center justify-center rounded-lg bg-[#111827] px-8 py-4 text-base font-bold text-white shadow-2xl transition-all duration-200 hover:bg-black hover:scale-105 active:scale-95"
           >
             {dict.landing.cta.button}
           </Link>
