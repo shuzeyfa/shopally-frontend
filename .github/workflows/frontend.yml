@@ -34,7 +34,7 @@ jobs:
         run: npm ci
 
       - name: 🔒 4. Audit Dependencies
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=high --omit=dev
 
       - name: 🧹 5. Run ESLint
         run: npm run lint

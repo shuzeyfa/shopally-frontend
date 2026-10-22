@@ -29,11 +29,6 @@ export function Hero() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-14 px-4 text-center lg:flex-row lg:text-left">
         {/* Left Column: Headlines & Actions */}
         <div className="flex-1 space-y-6 lg:max-w-xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-xs font-semibold text-content backdrop-blur-md shadow-xs">
-            <span className="flex h-2 w-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-accent">{dict.landing.hero.badge}</span>
-          </div>
-
           <h1 className="text-3xl font-extrabold tracking-tight text-content sm:text-5xl lg:text-6xl leading-[1.12]">
             {dict.landing.hero.headlinePrefix}{" "}
             <span className="text-accent underline decoration-accent/30 underline-offset-8">
