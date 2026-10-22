@@ -21,11 +21,29 @@ export function Features() {
       title: dict.landing.features.compare.title,
       desc: dict.landing.features.compare.desc,
     },
+    {
+      icon: "🔒",
+      title: dict.landing.features.officialApi.title,
+      desc: dict.landing.features.officialApi.desc,
+    },
+    {
+      icon: "🖼️",
+      title: dict.landing.features.imageSearch.title,
+      desc: dict.landing.features.imageSearch.desc,
+    },
+    {
+      icon: "🔔",
+      title: dict.landing.features.alerts.title,
+      desc: dict.landing.features.alerts.desc,
+    },
   ];
 
+  // Duplicate for seamless infinite loop
+  const marqueeItems = [...features, ...features];
+
   return (
-    <section id="features" className="py-24 sm:py-32 bg-surface">
-      <div className="mx-auto max-w-5xl px-4">
+    <section id="features" className="py-24 sm:py-32 bg-surface overflow-hidden">
+      <div className="mx-auto max-w-7xl px-4 text-center">
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-3xl font-extrabold tracking-tight text-content sm:text-4xl">
             {dict.landing.features.title}
@@ -35,21 +53,28 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 text-center">
-          {features.map((feature, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center p-4 transition-transform duration-300 hover:scale-105"
-            >
-              <div className="text-5xl mb-6 select-none filter drop-shadow-[0_10px_20px_rgba(255,211,0,0.2)]">
-                {feature.icon}
+        {/* Continuous Right-to-Left Marquee Carousel */}
+        <div className="relative w-full overflow-hidden py-4">
+          {/* Subtle edge fade gradient */}
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-surface to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-surface to-transparent z-10" />
+
+          <div className="animate-marquee gap-6 flex">
+            {marqueeItems.map((feature, i) => (
+              <div
+                key={i}
+                className="min-w-[280px] sm:min-w-[320px] max-w-[340px] flex-shrink-0 flex flex-col items-center bg-surface-muted/70 border border-line p-8 rounded-xl text-center shadow-lg transition-transform duration-300 hover:scale-[1.03] hover:border-accent select-none"
+              >
+                <div className="text-5xl mb-5 select-none filter drop-shadow-[0_10px_20px_rgba(255,211,0,0.2)]">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-bold text-content mb-2">{feature.title}</h3>
+                <p className="text-xs sm:text-sm leading-relaxed text-content-muted">
+                  {feature.desc}
+                </p>
               </div>
-              <h3 className="text-lg font-bold text-content mb-3">{feature.title}</h3>
-              <p className="text-xs sm:text-sm leading-relaxed text-content-muted max-w-xs">
-                {feature.desc}
-              </p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

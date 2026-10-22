@@ -17,8 +17,8 @@ export default function LandingPage() {
       <Hero />
       <Features />
       <HowItWorks />
-      <Testimonials />
       <Demo />
+      <Testimonials />
       <CTA />
     </div>
   );
