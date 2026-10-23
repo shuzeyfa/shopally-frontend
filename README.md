@@ -14,7 +14,7 @@ npm install
 npm run dev                    # http://localhost:3000
 ```
 
-The API must be running for the footer status indicator to turn green:
+Start the API locally for search, comparison, saved items and alerts:
 
 ```bash
 cd ../shopally-backend
@@ -177,3 +177,25 @@ contents when the session ends and return to login with the destination intact.
 Sign-in errors show translated retry guidance without raw provider details.
 The normal NextAuth sign-out clears the session; already-issued bearer tokens
 remain valid until their expiry (no server-side token revocation store).
+
+### Landing reference (Phase 3)
+
+The public reference at https://shop-ally-ai.vercel.app/ informs the landing
+layout, assets, copy, 768px hero breakpoint, 8-second cart movement, 40-second
+feature carousel, 25-second testimonial carousel, and dark footer. Components
+are independently implemented; no reference JavaScript is shipped.
+
+Existing Google entry links, translated controls and mobile navigation are
+preserved. Carousels can be paused and become manually scrollable for reduced
+motion. The demo attempts muted playback only once it is half visible, respects
+reduced motion, and offers manual playback when autoplay is blocked. It pauses
+offscreen or in a hidden tab and does not override a shopper's pause choice.
+
+The reference's Download/Contact links have no sections, so the footer retains
+the four working section links. Its image-search and official-integration
+marketing describes the target experience; those capabilities still belong to
+later integration work. The Playwright review compares mobile, tablet and desktop layouts and checks
+menus, themes, language persistence, navigation and demo playback. Deliberate
+differences include reduced-motion support, pause controls, working section
+links and retained theme/language controls. The layout uses the reference
+system font and keeps cart motion inside the viewport on narrow screens.

@@ -19,7 +19,7 @@ test("saved theme and language are present in the first server-rendered HTML", a
     assert.match(html, /<html[^>]*lang="am"[^>]*data-theme="dark"/);
     assert.match(html, /color-scheme:dark/);
     assert.match(html, /ፈጣን አገናኞች/);
-    assert.match(html, /የተረጋገጠ ሻጭ/);
+    assert.match(html, /ይከተሉን/);
     assert.doesNotMatch(html, /Quick Links|Verified Seller|Price Drop Alert|Live ETB FX Engine/);
   }
 });
@@ -39,4 +39,31 @@ test("login uses the selected language and footer links point to landing section
   for (const section of ["features", "how-it-works", "demo", "testimonials"]) {
     assert.ok(html.includes(`href="/landing#${section}"`), section);
   }
+});
+
+test("landing anchors resolve, the demo is manually playable, and markup has one main heading", async () => {
+  const html = await page("/landing");
+  assert.equal((html.match(/<main(?:\s|>)/g) ?? []).length, 1);
+  assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
+  let previous = -1;
+  for (const section of ["features", "how-it-works", "demo", "testimonials"]) {
+    const current = html.indexOf('id="' + section + '"');
+    assert.ok(current > previous, section);
+    assert.ok(html.includes('href="#' + section + '"'), section);
+    previous = current;
+  }
+  assert.match(html, /aria-label="Play demo"/);
+  const video = html.match(/<video[^>]*>/)[0];
+  assert.match(video, /preload="metadata"/);
+  assert.doesNotMatch(video, /autoplay/i);
+  assert.ok(html.includes("Follow Us"));
+  assert.doesNotMatch(html, /href="(?:#download|#contact)"|1 USD = 124.5 ETB/);
+});
+
+test("the bundled demo supports byte-range playback", async () => {
+  const response = await fetch(server.origin + "/media/shop.mp4", { headers: { Range: "bytes=0-31" } });
+  assert.equal(response.status, 206);
+  assert.match(response.headers.get("content-type"), /video\/mp4/);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  assert.equal(bytes.subarray(4, 8).toString(), "ftyp");
 });

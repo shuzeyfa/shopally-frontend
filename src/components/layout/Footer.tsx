@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { BackendStatus } from "./BackendStatus";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export function Footer() {
@@ -10,8 +9,8 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-line bg-surface text-content">
-      <div className="mx-auto max-w-6xl px-6 py-12">
+    <footer className="site-footer mt-auto bg-[#090c11] text-white dark:bg-[#111827]">
+      <div className="mx-auto max-w-7xl px-6 py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand, Tagline & Socials */}
           <div className="space-y-4">
@@ -25,12 +24,12 @@ export function Footer() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <span className="text-content text-lg font-bold">
+              <span className="text-white text-lg font-bold">
                 {dict.app.name}
               </span>
             </Link>
-            <p className="text-xs sm:text-sm text-content-muted max-w-sm leading-relaxed">
-              {dict.app.tagline}
+            <p className="text-xs sm:text-sm text-gray-300 max-w-sm leading-relaxed">
+              {dict.footer.description}
             </p>
             <div className="flex items-center gap-3 pt-2">
               {/* Twitter / X */}
@@ -76,10 +75,10 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-bold text-sm text-content uppercase tracking-wider">
+            <h3 className="font-bold text-base text-white">
               {dict.footer.quickLinks}
-            </h4>
-            <ul className="space-y-2 text-sm text-content-muted">
+            </h3>
+            <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <a href="/landing#features" className="hover:text-accent transition-colors">
                   {dict.landing.nav.features}
@@ -105,20 +104,20 @@ export function Footer() {
 
           {/* Overview */}
           <div className="space-y-3">
-            <h4 className="font-bold text-sm text-content uppercase tracking-wider">
-              {dict.footer.about}
-            </h4>
-            <p className="text-xs sm:text-sm text-content-muted leading-relaxed">
-              {dict.landing.hero.subhead}
+            <h3 className="font-bold text-base text-white">
+              {dict.footer.followUs}
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              {dict.footer.followDescription}
             </p>
-            <div className="pt-2">
-              <BackendStatus />
+            <div className="flex size-8 items-center justify-center rounded bg-accent">
+              <Image src="/WebsiteLogo/Frame.png" alt="" width={20} height={20} />
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 border-t border-line pt-6 text-center text-xs text-content-muted">
+        <div className="mt-8 text-center text-xs text-gray-400">
           <p>
             &copy; {year} {dict.app.name}. {dict.footer.rights}
           </p>

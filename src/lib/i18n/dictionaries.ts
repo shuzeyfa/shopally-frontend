@@ -211,15 +211,15 @@ const en = {
       },
       compare: {
         title: "Compare & Save",
-        desc: "Side-by-side product analysis to help you save on prices and shipping.",
+        desc: "Side-by-side product analysis to help you save.",
       },
       fx: {
         title: "ETB-Aware Pricing",
-        desc: "Live foreign exchange updates ensure accurate pricing in Ethiopian Birr.",
+        desc: "Live foreign exchange updates ensure accurate pricing.",
       },
       alerts: {
         title: "Price Alerts",
-        desc: "Receive instant notifications when product prices change or drop.",
+        desc: "Receive notifications when product prices change.",
       },
       saved: {
         title: "Curated Saved Items",
@@ -227,20 +227,23 @@ const en = {
       },
       i18n: {
         title: "Bilingual Support",
-        desc: "Seamless shopping with complete Amharic (አማርኛ) and English language support.",
+        desc: "Amharic & English language support for seamless shopping.",
       },
       officialApi: {
         title: "Official API Integration",
-        desc: "Direct integration with global e-commerce platforms for live data accuracy.",
+        desc: "Secure integration with Alibaba/AliExpress APIs.",
       },
       imageSearch: {
         title: "Image Search",
-        desc: "Find products simply by uploading or searching with a photo.",
+        desc: "Find products by uploading or searching with a photo.",
       },
     },
+    motion: { pause: "Pause animation", resume: "Resume animation" },
     demo: {
-      title: "ShopAlly in Action",
-      titleHighlight: "in Action",
+      title: "See ShopAlly in Action",
+      videoTitle: "ShopAlly Demo Video",
+      play: "Play demo",
+      unavailable: "The video could not play. Check your connection and try again.",
       videoLabel: "ShopAlly demonstration video",
       subtitle: "Affordable shopping made simple",
     },
@@ -268,7 +271,7 @@ const en = {
         },
         {
           name: "Mulugeta Y.",
-          location: "Addis Ababa",
+          location: "Adama",
           quote: "I used to waste time checking prices everywhere — now ShopAlly gives me results instantly!",
           rating: 5,
         },
@@ -286,17 +289,17 @@ const en = {
       step1: {
         number: "01",
         title: "Ask a Question",
-        desc: "Type your request in English or Amharic about what you want to buy or search by image.",
+        desc: "Type your question in English or Amharic about what you need to buy, or search by image.",
       },
       step2: {
         number: "02",
         title: "Get Smart Recommendations",
-        desc: "Our AI analyzes your request and finds the best products with linked pricing.",
+        desc: "Our AI analyzes your needs and suggests the best products with Ethiopian pricing.",
       },
       step3: {
         number: "03",
         title: "Compare & Buy",
-        desc: "Compare products and choose the best option directly on the marketplace.",
+        desc: "Compare prices, reviews, and shipping options to make the best choice.",
       },
     },
     cta: {
@@ -308,7 +311,9 @@ const en = {
   footer: {
     rights: "All rights reserved.",
     quickLinks: "Quick links",
-    about: "About",
+    followUs: "Follow Us",
+    description: "Your AI-powered shopping assistant that makes online shopping in Ethiopia smarter, faster, and more affordable.",
+    followDescription: "Stay updated with the latest features and shopping tips from ShopAlly.",
   },
 };
 
@@ -533,7 +538,7 @@ const am: Dictionary = {
       },
       alerts: {
         title: "የዋጋ ማሳወቂያዎች",
-        desc: "የምርት ዋጋ ሲቀየር ወይም ሲቀንስ ፈጣን ማሳወቂያዎችን ያግኙ።",
+        desc: "የምርት ዋጋ ሲቀየር ማሳወቂያዎችን ያግኙ።",
       },
       saved: {
         title: "የተቀመጡ ተወዳጅ ዕቃዎች",
@@ -545,16 +550,19 @@ const am: Dictionary = {
       },
       officialApi: {
         title: "ቀጥተኛ የ API ግንኙነት",
-        desc: "ትክክለኛ የምርት መረጃ ለማግኘት ከዓለም አቀፍ የኢኮሜርስ መድረኮች ጋር የተገናኘ።",
+        desc: "ከ Alibaba/AliExpress API ጋር ደህንነቱ የተጠበቀ ግንኙነት።",
       },
       imageSearch: {
         title: "የምስል ፍለጋ",
         desc: "ፎቶ በማስገባት ወይም ፎቶ በማንሳት በቀላሉ ምርቶችን ያግኙ።",
       },
     },
+    motion: { pause: "እንቅስቃሴውን አቁም", resume: "እንቅስቃሴውን ቀጥል" },
     demo: {
-      title: "ሾፓሊ በተግባር",
-      titleHighlight: "በተግባር",
+      title: "ሾፓሊን በተግባር ይመልከቱ",
+      videoTitle: "የሾፓሊ ማሳያ ቪዲዮ",
+      play: "ማሳያውን አጫውት",
+      unavailable: "ቪዲዮውን ማጫወት አልተቻለም። ግንኙነትዎን ፈትሸው እንደገና ይሞክሩ።",
       videoLabel: "የሾፓሊ ማሳያ ቪዲዮ",
       subtitle: "ተመጣጣኝ እና ቀላል ግዢ",
     },
@@ -582,7 +590,7 @@ const am: Dictionary = {
         },
         {
           name: "ሙሉጌታ ይ.",
-          location: "አዲስ አበባ",
+          location: "አዳማ",
           quote: "በየቦታው ዋጋ ለመፈተሽ ጊዜዬን አጠፋ ነበር - አሁን ሾፓሊ ውጤቶችን በቅጽበት ይሰጠኛል!",
           rating: 5,
         },
@@ -605,12 +613,12 @@ const am: Dictionary = {
       step2: {
         number: "02",
         title: "ብልጥ ምክሮችን ያግኙ",
-        desc: "የእኛ AI ፍላጎትዎን በመተንተን ምርጥ ምርቶችን ከትክክለኛ ዋጋ ጋር ያገኛል።",
+        desc: "የእኛ AI ፍላጎትዎን በመተንተን ምርጥ ምርቶችን ከኢትዮጵያ ዋጋ ጋር ይመክራል።",
       },
       step3: {
         number: "03",
         title: "ያወዳድሩ እና ይግዙ",
-        desc: "ምርቶችን ያወዳድሩ እና ምርጡን አማራጭ በቀጥታ ከመደብሩ ይግዙ።",
+        desc: "ምርጥ ምርጫ ለማድረግ ዋጋዎችን፣ ግምገማዎችን እና የማጓጓዣ አማራጮችን ያወዳድሩ።",
       },
     },
     cta: {
@@ -622,7 +630,9 @@ const am: Dictionary = {
   footer: {
     rights: "መብቱ በሕግ የተጠበቀ ነው።",
     quickLinks: "ፈጣን አገናኞች",
-    about: "ስለ ሾፓሊ",
+    followUs: "ይከተሉን",
+    description: "በኢትዮጵያ የኦንላይን ግዢን ብልጥ፣ ፈጣን እና ተመጣጣኝ የሚያደርግ የ AI ግዢ ረዳትዎ።",
+    followDescription: "ስለ ሾፓሊ አዳዲስ ባህሪያት እና የግዢ ምክሮች ወቅታዊ መረጃ ያግኙ።",
   },
 };
 

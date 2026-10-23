@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { AuthEntryLink } from "@/components/auth/AuthEntryLink";
 import Image from "next/image";
@@ -24,6 +24,9 @@ export function Header() {
   const dict = useDictionary();
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
   const [rawActiveSection, setRawActiveSection] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,75 +48,81 @@ export function Header() {
     { id: "testimonials", label: dict.landing.nav.testimonials },
   ];
 
-  // Scroll spy to highlight whichever section is currently in view
   useEffect(() => {
-    if (!isPublicLanding) {
-      return;
-    }
-
-    const sectionIds = ["features", "how-it-works", "demo", "testimonials"];
-
-    const handleScroll = () => {
-      // 140px offset to account for sticky header height
-      const scrollPos = window.scrollY + 140;
-
-      let current: string | null = null;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            current = id;
-            break;
-          }
-        }
-      }
-      setRawActiveSection((prev) => (prev !== current ? current : prev));
+    if (!isPublicLanding) return;
+    let frame = 0;
+    const update = () => {
+      const offset = (headerRef.current?.offsetHeight ?? 68) + 24;
+      const ids = ["features", "how-it-works", "demo", "testimonials"];
+      const current = ids.find((id) => {
+        const rect = document.getElementById(id)?.getBoundingClientRect();
+        return rect && rect.top <= offset && rect.bottom > offset;
+      }) ?? null;
+      setRawActiveSection((previous) => previous === current ? previous : current);
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    const schedule = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    schedule();
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
   }, [isPublicLanding]);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
+    const menu = menuRef.current;
+    const toggle = toggleRef.current;
     const previousOverflow = document.body.style.overflow;
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeAtDesktop = () => { if (desktop.matches) setIsMobileMenuOpen(false); };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setIsMobileMenuOpen(false);
+        toggle?.focus();
+      }
+      if (event.key === "Tab" && menu && toggle) {
+        const controls = [toggle, ...menu.querySelectorAll<HTMLElement>("a[href], button:not(:disabled)")];
+        const first = controls[0];
+        const last = controls[controls.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault(); last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault(); first.focus();
+        }
+      }
     };
     document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", closeOnEscape);
+    menu?.querySelector<HTMLElement>("a[href]")?.focus();
+    document.addEventListener("keydown", onKeyDown);
+    desktop.addEventListener("change", closeAtDesktop);
+    closeAtDesktop();
     return () => {
       document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("keydown", onKeyDown);
+      desktop.removeEventListener("change", closeAtDesktop);
     };
   }, [isMobileMenuOpen]);
 
-  // Smooth scroll handler for anchor links
-  const handleAnchorClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
-      const target = document.getElementById(id);
-      if (target) {
-        e.preventDefault();
-        setIsMobileMenuOpen(false);
-        target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-      }
-    },
-    [],
-  );
+  // Native anchors preserve hash navigation; CSS supplies motion and offset.
+  const handleAnchorClick = () => setIsMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-surface/90 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 relative">
+    <header ref={headerRef} className="site-header sticky top-0 z-50 border-b border-line bg-surface">
+      <div className="relative z-20 mx-auto flex h-17 items-center justify-between gap-3 bg-surface px-6">
         {/* Left: Brand Logo */}
         <Link
           href="/"
+          aria-label={dict.app.name}
           className="flex items-center gap-2.5 font-bold tracking-tight z-10"
         >
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent p-1 shadow-xs">
+          <div className="flex h-6 w-6 lg:h-8 lg:w-8 items-center justify-center rounded-md bg-accent p-1 shadow-xs">
             <Image
               src="/WebsiteLogo/Frame.png"
               alt=""
@@ -122,21 +131,22 @@ export function Header() {
               className="h-full w-full object-contain"
             />
           </div>
-          <span className="text-content text-lg font-bold">
+          <span className="hidden text-content text-xl font-bold lg:inline">
             {dict.app.name}
           </span>
         </Link>
 
         {/* Center: Desktop Navigation Links (Centered) */}
         {isPublicLanding && (
-          <nav aria-label={dict.nav.primary} className="hidden md:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2">
+          <nav aria-label={dict.nav.primary} className="hidden lg:flex items-center gap-6 text-sm font-medium absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  onClick={(e) => handleAnchorClick(e, item.id)}
+                  aria-current={isActive ? "location" : undefined}
+                  onClick={handleAnchorClick}
                   className={cn(
                     "transition-all duration-150 py-1 relative hover:text-accent",
                     isActive
@@ -177,12 +187,12 @@ export function Header() {
           ) : status === "unauthenticated" ? (
             <div className="flex items-center gap-2 mr-1">
               <AuthEntryLink
-                className="text-xs font-medium text-content-muted hover:text-content px-2 py-1 hidden sm:inline-block"
+                className={cn("text-xs font-medium text-content-muted hover:text-content px-2 py-1", isPublicLanding ? "hidden" : "hidden sm:inline-block")}
               >
                 {dict.auth.signIn}
               </AuthEntryLink>
               <AuthEntryLink
-                className="hidden sm:inline-flex items-center justify-center rounded-md bg-accent px-3 py-1.5 text-xs font-bold text-accent-content shadow-xs transition-transform hover:scale-105"
+                className="inline-flex items-center justify-center rounded bg-accent px-4 py-2 text-sm font-semibold text-accent-content shadow-lg motion-safe:hover:scale-105"
               >
                 {dict.landing.hero.startSearching}
               </AuthEntryLink>
@@ -192,15 +202,16 @@ export function Header() {
           {/* Desktop Language & Theme Toggles */}
           <div className={cn("items-center gap-1", isPublicLanding ? "hidden sm:flex" : "flex")}>
             <LanguageToggle />
-            <ThemeToggle />
+            <ThemeToggle compact={isPublicLanding} />
           </div>
 
           {/* Mobile Hamburger Toggle Button */}
           {isPublicLanding && (
             <button
               type="button"
+              ref={toggleRef}
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="md:hidden flex h-9 w-9 items-center justify-center rounded-md border border-line bg-surface text-content hover:bg-surface-muted transition-colors focus:outline-none"
+              className="lg:hidden flex h-9 w-9 items-center justify-center rounded-md border border-line bg-surface text-content hover:bg-surface-muted transition-colors"
               aria-label={isMobileMenuOpen ? dict.actions.closeMenu : dict.actions.openMenu}
               aria-controls="mobile-navigation"
               aria-expanded={isMobileMenuOpen}
@@ -243,14 +254,14 @@ export function Header() {
       {isPublicLanding && isMobileMenuOpen && (
         <div
           aria-hidden="true"
-          onClick={() => setIsMobileMenuOpen(false)}
-          className="fixed inset-x-0 bottom-0 top-14 -z-10 bg-black/60 backdrop-blur-md md:hidden transition-opacity duration-200"
+          onClick={() => { setIsMobileMenuOpen(false); toggleRef.current?.focus(); }}
+          className="fixed inset-x-0 bottom-0 top-17 z-10 bg-black/60 backdrop-blur-md lg:hidden"
         />
       )}
 
       {/* Mobile Navigation Drawer */}
       {isPublicLanding && isMobileMenuOpen && (
-        <div id="mobile-navigation" className="md:hidden relative z-20 border-b border-line bg-surface/98 px-5 py-6 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
+        <div ref={menuRef} id="mobile-navigation" className="absolute inset-x-0 top-full z-20 max-h-[calc(100dvh-4.25rem)] overflow-y-auto border-b border-line bg-surface px-5 py-6 shadow-2xl lg:hidden">
           <nav aria-label={dict.nav.primary} className="flex flex-col space-y-3">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
@@ -258,7 +269,8 @@ export function Header() {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  onClick={(e) => handleAnchorClick(e, item.id)}
+                  aria-current={isActive ? "location" : undefined}
+                  onClick={handleAnchorClick}
                   className={cn(
                     "flex items-center justify-between rounded-lg px-3 py-2.5 text-base font-semibold transition-colors",
                     isActive

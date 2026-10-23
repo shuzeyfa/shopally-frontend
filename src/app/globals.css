@@ -84,97 +84,45 @@ body {
   outline-offset: 2px;
 }
 
-/* Animations matching shopally-ai with refined organic motion */
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+/* Landing measurements follow the public reference; app tokens stay shared. */
+.landing-page, .site-header, .site-footer {
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.landing-page { --content: #262b32; }
+[data-theme="dark"] .landing-page { --content: #f9fafb; }
+.landing-page section[id] { scroll-margin-top: 5.25rem; }
 
-@keyframes float-gentle {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+@keyframes landing-cart {
+  0%, 100% { transform: translateX(0) rotate(0); }
+  25% { transform: translateX(var(--cart-travel)) rotate(0); }
+  50% { transform: translateX(0) rotate(360deg); }
+  75% { transform: translateX(calc(-1 * var(--cart-travel))) rotate(0); }
 }
-
-@keyframes float-delayed {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
+@keyframes landing-bob {
+  0%, 50%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-4px); }
+  75% { transform: translateY(4px); }
 }
-
-@keyframes float-reverse {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(8px) rotate(-1deg);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.15;
-  }
-  50% {
-    transform: scale(1.08);
-    opacity: 0.28;
-  }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 35s linear infinite;
-}
-
-.animate-marquee:hover {
+@keyframes landing-marquee { to { transform: translateX(-50%); } }
+.landing-cart { --cart-travel: 24px; }
+@media (min-width: 64rem) { .landing-cart { --cart-travel: 100px; } }
+.landing-marquee-window { overflow: hidden; }
+.landing-marquee-track { display: flex; width: max-content; }
+.landing-marquee-group { display: flex; flex: none; gap: 1.5rem; padding-right: 1.5rem; }
+.landing-marquee-item { flex: none; }
+.landing-marquee-window:is(:hover, :focus-within) .landing-marquee-track,
+.landing-marquee[data-paused="true"] .landing-marquee-track {
   animation-play-state: paused;
 }
-
-.animate-marquee-fast {
-  display: flex;
-  width: max-content;
-  animation: marquee 25s linear infinite;
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .landing-cart { animation: landing-cart 8s ease-in-out infinite; }
+  .landing-cart:hover { animation-play-state: paused; }
+  .landing-start { animation: landing-bob 1.5s ease-in-out infinite; }
+  .landing-start:is(:hover, :focus-visible) { animation-play-state: paused; }
+  .landing-marquee-track { animation: landing-marquee var(--marquee-duration) linear infinite; }
 }
-
-.animate-marquee-fast:hover {
-  animation-play-state: paused;
-}
-
-.animate-float {
-  animation: float-gentle 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-.animate-float-delayed {
-  animation: float-delayed 6s cubic-bezier(0.4, 0, 0.2, 1) 1s infinite;
-}
-
-.animate-float-reverse {
-  animation: float-reverse 5.5s cubic-bezier(0.4, 0, 0.2, 1) 0.5s infinite;
-}
-
-.animate-glow {
-  animation: pulse-glow 5s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-fast,
-  .animate-float,
-  .animate-float-delayed,
-  .animate-float-reverse,
-  .animate-glow {
-    animation: none !important;
-  }
+  .landing-marquee-window { overflow-x: auto; }
+  .landing-marquee-group[aria-hidden="true"] { display: none; }
 }

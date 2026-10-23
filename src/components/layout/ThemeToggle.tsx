@@ -37,7 +37,7 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ compact = false }: { compact?: boolean }) {
   const { theme, toggleTheme } = useTheme();
   const dict = useDictionary();
 
@@ -55,7 +55,7 @@ export function ThemeToggle() {
       aria-pressed={isDark}
     >
       {isDark ? <MoonIcon /> : <SunIcon />}
-      <span className="sr-only sm:not-sr-only">
+      <span className={compact ? "sr-only" : "sr-only sm:not-sr-only"}>
         {isDark ? dict.theme.dark : dict.theme.light}
       </span>
     </Button>

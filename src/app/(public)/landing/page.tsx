@@ -13,13 +13,13 @@ import { CTA } from "@/components/landing/CTA";
  */
 export default function LandingPage() {
   return (
-    <div className="flex w-full flex-col bg-surface">
+    <main className="landing-page flex w-full flex-col bg-surface">
       <Hero />
       <Features />
       <HowItWorks />
       <Demo />
       <Testimonials />
       <CTA />
-    </div>
+    </main>
   );
 }
