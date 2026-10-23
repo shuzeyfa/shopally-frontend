@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { safeCallbackPath } from "@/lib/auth-routing";
 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -38,32 +39,18 @@ function GoogleIcon() {
 /**
  * Signin form component referencing the clean layout from the design reference.
  *
- * Supports Google OAuth as the primary authentication provider and includes a demo
- * account option for local development when Google OAuth secrets are not yet provisioned.
+ * Google OAuth is the only sign-in method; email ownership is verified by Google.
  */
 export function SigninForm() {
   const dict = useDictionary();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/search";
+  const callbackUrl = safeCallbackPath(searchParams.get("callbackUrl"));
 
   const [isLoading, setIsLoading] = useState(false);
-  const [demoEmail, setDemoEmail] = useState("shopper@shopally.ai");
-  const [demoName, setDemoName] = useState("Demo Shopper");
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
     await signIn("google", { callbackUrl });
-  };
-
-  const handleDemoSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!demoEmail) return;
-    setIsLoading(true);
-    await signIn("credentials", {
-      email: demoEmail,
-      name: demoName,
-      callbackUrl,
-    });
   };
 
   return (
@@ -94,55 +81,6 @@ export function SigninForm() {
           <GoogleIcon />
           <span>{dict.auth.signInWithGoogle}</span>
         </Button>
-
-        <div className="relative my-6 flex items-center justify-center">
-          <div className="w-full border-t border-line" />
-          <span className="absolute bg-surface-raised px-3 text-xs uppercase tracking-wider text-content-muted">
-            {dict.auth.orDemo}
-          </span>
-        </div>
-
-        <form onSubmit={handleDemoSignIn} className="space-y-3">
-          <div>
-            <label htmlFor="email" className="block text-xs font-medium text-content-muted mb-1">
-              {dict.auth.emailPlaceholder}
-            </label>
-            <input
-              id="email"
-              type="email"
-              required
-              value={demoEmail}
-              onChange={(e) => setDemoEmail(e.target.value)}
-              className="w-full rounded-md border border-line bg-surface-muted px-3 py-2 text-sm text-content outline-none focus:border-accent"
-              placeholder={dict.auth.emailPlaceholder}
-              disabled={isLoading}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="name" className="block text-xs font-medium text-content-muted mb-1">
-              {dict.auth.namePlaceholder}
-            </label>
-            <input
-              id="name"
-              type="text"
-              value={demoName}
-              onChange={(e) => setDemoName(e.target.value)}
-              className="w-full rounded-md border border-line bg-surface-muted px-3 py-2 text-sm text-content outline-none focus:border-accent"
-              placeholder={dict.auth.namePlaceholder}
-              disabled={isLoading}
-            />
-          </div>
-
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-full mt-2"
-            disabled={isLoading}
-          >
-            {isLoading ? dict.api.checking : dict.auth.demoSignInButton}
-          </Button>
-        </form>
       </div>
 
       <div className="mt-6 text-center text-xs text-content-muted">

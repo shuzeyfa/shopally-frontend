@@ -126,8 +126,19 @@ npm run lint
 
 ## Current status
 
-The app includes Google/demo auth, landing, search, compare, saved items, price
+The app includes Google auth, landing, search, compare, saved items, price
 alerts, and a profile page with account totals and persisted theme/language
 preferences. The real AliExpress and LLM integrations remain mock-first. The
 backend's `render.yaml` prepares the hosted API and worker services, but you
 must connect accounts, enter provider credentials, and initiate each deploy.
+
+### Authentication regression checks
+
+Google OAuth is the only sign-in provider. The former passwordless demo provider
+has been removed; its existing session cookies and API tokens are rejected.
+Deploy the backend and frontend changes together to enforce that retirement.
+
+After `npm run build`, run `npm run test:auth`. These HTTP integration tests start
+an isolated production server with temporary signing secrets and check provider
+availability, legacy-session rejection, protected routes, callback destinations,
+and landing-page entry links. They do not use Google credentials or production data.

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AuthEntryLink } from "@/components/auth/AuthEntryLink";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export function CTA() {
@@ -16,12 +16,11 @@ export function CTA() {
           {dict.landing.cta.subtitle}
         </p>
         <div className="flex justify-center">
-          <Link
-            href="/search"
+          <AuthEntryLink
             className="inline-flex items-center justify-center rounded-lg bg-[#111827] px-8 py-4 text-base font-bold text-white shadow-2xl transition-all duration-200 hover:bg-black hover:scale-105 active:scale-95"
           >
             {dict.landing.cta.button}
-          </Link>
+          </AuthEntryLink>
         </div>
       </div>
     </section>

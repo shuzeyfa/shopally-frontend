@@ -1,17 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-
-/**
- * Route prefixes belonging to the authenticated application under src/app/(app).
- */
-const PROTECTED_PREFIXES = [
-  "/search",
-  "/compare",
-  "/saved",
-  "/alerts",
-  "/profile",
-];
+import { isAppPath, safeCallbackPath } from "@/lib/auth-routing";
 
 /**
  * Middleware that guards protected application routes.
@@ -25,7 +15,7 @@ const PROTECTED_PREFIXES = [
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const isAuthenticated = Boolean(token);
+  const isAuthenticated = Boolean(token?.sub && !token.sub.startsWith("demo-"));
 
   // Root redirect
   if (pathname === "/") {
@@ -36,16 +26,14 @@ export async function middleware(req: NextRequest) {
   // Prevent authenticated users from getting stuck on the login page
   if (pathname === "/login") {
     if (isAuthenticated) {
-      const callbackUrl = req.nextUrl.searchParams.get("callbackUrl") || "/search";
+      const callbackUrl = safeCallbackPath(req.nextUrl.searchParams.get("callbackUrl"), req.nextUrl.origin);
       return NextResponse.redirect(new URL(callbackUrl, req.url));
     }
     return NextResponse.next();
   }
 
   // Guard protected routes under (app)/*
-  const isProtected = PROTECTED_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(prefix + "/")
-  );
+  const isProtected = isAppPath(pathname);
 
   if (isProtected && !isAuthenticated) {
     const callbackUrl = `${pathname}${search}`;

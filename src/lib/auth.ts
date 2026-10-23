@@ -1,8 +1,6 @@
 import { SignJWT } from "jose";
-import { createHash } from "crypto";
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 
 const TOKEN_ISSUER = "shopally-web";
 const TOKEN_AUDIENCE = "shopally-api";
@@ -58,29 +56,14 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID ?? "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     }),
-    // Development fallback provider so developers can test authenticated flows
-    // locally before Google OAuth client credentials are configured.
-    CredentialsProvider({
-      id: "credentials",
-      name: "Demo Account",
-      credentials: {
-        email: { label: "Email", type: "email", placeholder: "demo@shopally.ai" },
-        name: { label: "Name", type: "text", placeholder: "Demo Shopper" },
-      },
-      async authorize(credentials) {
-        if (!credentials?.email) {
-          return null;
-        }
-        return {
-          id: `demo-${createHash("sha256").update(credentials.email).digest("hex").slice(0, 24)}`,
-          email: credentials.email,
-          name: credentials.name || "Demo Shopper",
-        };
-      },
-    }),
   ],
   callbacks: {
     async jwt({ token, user }) {
+      // Retire sessions created by the removed, unverified demo provider.
+      // NextAuth clears the session cookie when this callback rejects it.
+      if (!user && token.sub?.startsWith("demo-")) {
+        throw new Error("Demo accounts are no longer supported");
+      }
       if (user) {
         token.sub = user.id ?? token.sub;
         token.email = user.email ?? token.email;

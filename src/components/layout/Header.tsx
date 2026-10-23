@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { AuthEntryLink } from "@/components/auth/AuthEntryLink";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
@@ -173,18 +174,16 @@ export function Header() {
             </div>
           ) : status === "unauthenticated" ? (
             <div className="flex items-center gap-2 mr-1">
-              <Link
-                href="/login"
+              <AuthEntryLink
                 className="text-xs font-medium text-content-muted hover:text-content px-2 py-1 hidden sm:inline-block"
               >
                 {dict.auth.signIn}
-              </Link>
-              <Link
-                href="/login"
+              </AuthEntryLink>
+              <AuthEntryLink
                 className="hidden sm:inline-flex items-center justify-center rounded-md bg-accent px-3 py-1.5 text-xs font-bold text-accent-content shadow-xs transition-transform hover:scale-105"
               >
                 {dict.landing.hero.startSearching}
-              </Link>
+              </AuthEntryLink>
             </div>
           ) : null}
 
@@ -275,23 +274,21 @@ export function Header() {
 
           <div className="mt-6 pt-5 border-t border-line space-y-4">
             {/* Primary Action Button */}
-            <Link
-              href="/login"
+            <AuthEntryLink
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex w-full items-center justify-center rounded-lg bg-accent py-3 text-center text-sm font-bold text-accent-content shadow-md transition-transform active:scale-98"
             >
               {dict.landing.hero.startSearching}
-            </Link>
+            </AuthEntryLink>
 
             {/* Auth / Preferences Controls */}
             <div className="flex items-center justify-between pt-1 text-sm">
-              <Link
-                href="/login"
+              <AuthEntryLink
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="font-medium text-content-muted hover:text-content"
               >
                 {dict.auth.signIn}
-              </Link>
+              </AuthEntryLink>
 
               <div className="flex items-center gap-2">
                 <LanguageToggle />

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AuthEntryLink } from "@/components/auth/AuthEntryLink";
 import Image from "next/image";
 import { buttonClasses } from "@/components/ui/Button";
 import { useDictionary } from "@/providers/LanguageProvider";
@@ -48,8 +48,7 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-3 lg:justify-start">
-            <Link
-              href="/search"
+            <AuthEntryLink
               className={buttonClasses({
                 variant: "primary",
                 size: "md",
@@ -57,7 +56,7 @@ export function Hero() {
               })}
             >
               {dict.landing.hero.startSearching} →
-            </Link>
+            </AuthEntryLink>
             <a
               href="#demo"
               className={buttonClasses({
