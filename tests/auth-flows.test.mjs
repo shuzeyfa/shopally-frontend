@@ -1,58 +1,16 @@
 import assert from "node:assert/strict";
-import { randomBytes } from "node:crypto";
-import { spawn } from "node:child_process";
-import { createServer } from "node:net";
-import { once } from "node:events";
-import { setTimeout as delay } from "node:timers/promises";
 import { before, after, test } from "node:test";
 import { encode } from "next-auth/jwt";
+import { startProductionServer } from "./helpers/production-server.mjs";
 
-const secret = randomBytes(32).toString("hex");
 let server;
 let origin;
-let logs = "";
-
+let secret;
 before(async () => {
-  const portReservation = createServer();
-  portReservation.listen(0, "127.0.0.1");
-  await once(portReservation, "listening");
-  const port = portReservation.address().port;
-  await new Promise((resolve) => portReservation.close(resolve));
-  origin = `http://127.0.0.1:${port}`;
-  server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-    windowsHide: true,
-    stdio: ["ignore", "pipe", "pipe"],
-    env: {
-      ...process.env,
-      NODE_ENV: "production",
-      NEXTAUTH_URL: origin,
-      NEXTAUTH_SECRET: secret,
-      AUTH_JWT_SECRET: secret,
-      GOOGLE_CLIENT_ID: "test-client-id",
-      GOOGLE_CLIENT_SECRET: "test-client-secret",
-    },
-  });
-  const capture = (chunk) => { logs = (logs + chunk).slice(-4000); };
-  server.stdout.on("data", capture);
-  server.stderr.on("data", capture);
-  for (let attempt = 0; attempt < 120; attempt++) {
-    if (server.exitCode !== null) throw new Error(`Test server exited: ${logs}`);
-    try {
-      const response = await fetch(`${origin}/api/auth/providers`, { signal: AbortSignal.timeout(1000) });
-      if (response.ok) return;
-    } catch { /* Server is still starting. */ }
-    await delay(500);
-  }
-  throw new Error(`Test server did not become ready: ${logs}`);
+  server = await startProductionServer();
+  ({ origin, secret } = server);
 });
-
-after(async () => {
-  if (server && server.exitCode === null) {
-    const exited = once(server, "exit");
-    server.kill();
-    await exited;
-  }
-});
+after(async () => { await server?.stop(); });
 
 async function sessionCookie(sub) {
   const token = await encode({ secret, token: { sub, apiToken: "test-api-token" }, maxAge: 3600 });

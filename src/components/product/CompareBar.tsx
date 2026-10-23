@@ -36,7 +36,7 @@ export function CompareBar() {
                   type="button"
                   onClick={() => dispatch(removeCompareProduct(id))}
                   className="text-content-muted hover:text-negative ml-0.5 cursor-pointer"
-                  aria-label={`Remove ${id}`}
+                  aria-label={`${dict.compare.remove} ${id}`}
                 >
                   ✕
                 </button>

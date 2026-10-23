@@ -37,7 +37,7 @@ export interface SavedItem {
 /** Payload of GET /api/v1/search. */
 export interface SearchResult {
   products: Product[];
-  total?: number;
+  total: number;
 }
 
 /** A single attribute comparison row across multiple products. */

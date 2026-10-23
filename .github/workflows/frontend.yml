@@ -51,3 +51,6 @@ jobs:
 
       - name: Verify authentication flows
         run: npm run test:auth
+
+      - name: Verify frontend foundations
+        run: npm run test:foundations

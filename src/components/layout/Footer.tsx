@@ -19,7 +19,7 @@ export function Footer() {
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent p-1 shadow-xs">
                 <Image
                   src="/WebsiteLogo/Frame.png"
-                  alt="ShopAlly Logo"
+                  alt=""
                   width={28}
                   height={28}
                   className="h-full w-full object-contain"
@@ -77,26 +77,26 @@ export function Footer() {
           {/* Quick Links */}
           <div className="space-y-3">
             <h4 className="font-bold text-sm text-content uppercase tracking-wider">
-              Quick Links
+              {dict.footer.quickLinks}
             </h4>
             <ul className="space-y-2 text-sm text-content-muted">
               <li>
-                <a href="#features" className="hover:text-accent transition-colors">
+                <a href="/landing#features" className="hover:text-accent transition-colors">
                   {dict.landing.nav.features}
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="hover:text-accent transition-colors">
+                <a href="/landing#how-it-works" className="hover:text-accent transition-colors">
                   {dict.landing.nav.howItWorks}
                 </a>
               </li>
               <li>
-                <a href="#demo" className="hover:text-accent transition-colors">
+                <a href="/landing#demo" className="hover:text-accent transition-colors">
                   {dict.landing.nav.demo}
                 </a>
               </li>
               <li>
-                <a href="#testimonials" className="hover:text-accent transition-colors">
+                <a href="/landing#testimonials" className="hover:text-accent transition-colors">
                   {dict.landing.nav.testimonials}
                 </a>
               </li>
@@ -106,7 +106,7 @@ export function Footer() {
           {/* Overview */}
           <div className="space-y-3">
             <h4 className="font-bold text-sm text-content uppercase tracking-wider">
-              About
+              {dict.footer.about}
             </h4>
             <p className="text-xs sm:text-sm text-content-muted leading-relaxed">
               {dict.landing.hero.subhead}

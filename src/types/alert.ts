@@ -3,7 +3,7 @@
  *
  * Note the create payload carries no `userId`: the backend derives the owner
  * from the authenticated request and ignores any owner sent in the body.
- * Alert endpoints stay unmounted server-side until auth lands in Phase 2.
+ * Alert endpoints require the API bearer token issued after sign-in.
  */
 
 export interface Alert {

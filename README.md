@@ -142,3 +142,15 @@ After `npm run build`, run `npm run test:auth`. These HTTP integration tests sta
 an isolated production server with temporary signing secrets and check provider
 availability, legacy-session rejection, protected routes, callback destinations,
 and landing-page entry links. They do not use Google credentials or production data.
+
+### Foundation regression checks
+
+After `npm run build`, run `npm run test:foundations`. These checks cover
+strict API envelopes, request timeouts, localized errors and product labels,
+preference cookie attributes, per-request Redux isolation, and EN/Amharic
+server-rendered HTML across reloads and separate visitors.
+
+The API transport rejects malformed envelopes with `INVALID_RESPONSE` and
+bounds backend requests to 30 seconds. Shared UI errors are selected by code
+from the active dictionary; provider messages do not override the UI language.
+Redux browser listeners are attached after mount and removed on unmount.

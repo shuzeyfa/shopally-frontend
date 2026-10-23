@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/Card";
 import { useCompareProductsMutation } from "@/lib/api/compareApi";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { clearCompare, removeCompareProduct } from "@/lib/slices/compareSlice";
+import { localizedErrorMessage } from "@/lib/api/errors";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export default function ComparePage() {
@@ -25,8 +26,7 @@ export default function ComparePage() {
     }
   }, [compareProducts, selectedProductIds]);
 
-  const errorMessage =
-    error && "message" in error ? error.message : dict.search.errorMessage;
+  const errorMessage = localizedErrorMessage(error, dict, dict.search.errorMessage);
 
   return (
     <div className="space-y-6">
@@ -148,7 +148,9 @@ export default function ComparePage() {
                   className="border-b border-line last:border-b-0 odd:bg-surface-muted/40"
                 >
                   <th className="p-4 align-top font-medium text-content-muted">
-                    {attribute.label}
+                    {Object.hasOwn(dict.compare.attributes, attribute.key)
+                      ? dict.compare.attributes[attribute.key as keyof typeof dict.compare.attributes]
+                      : attribute.label}
                   </th>
                   {data.products.map((product) => (
                     <td

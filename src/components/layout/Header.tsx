@@ -78,15 +78,17 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isPublicLanding]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!isMobileMenuOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", closeOnEscape);
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", closeOnEscape);
     };
   }, [isMobileMenuOpen]);
 
@@ -97,7 +99,7 @@ export function Header() {
       if (target) {
         e.preventDefault();
         setIsMobileMenuOpen(false);
-        target.scrollIntoView({ behavior: "smooth" });
+        target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       }
     },
     [],
@@ -114,7 +116,7 @@ export function Header() {
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent p-1 shadow-xs">
             <Image
               src="/WebsiteLogo/Frame.png"
-              alt="ShopAlly Logo"
+              alt=""
               width={28}
               height={28}
               className="h-full w-full object-contain"
@@ -127,7 +129,7 @@ export function Header() {
 
         {/* Center: Desktop Navigation Links (Centered) */}
         {isPublicLanding && (
-          <nav className="hidden md:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2">
+          <nav aria-label={dict.nav.primary} className="hidden md:flex items-center gap-7 text-sm font-medium absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -167,7 +169,7 @@ export function Header() {
                 variant="ghost"
                 size="sm"
                 onClick={() => signOut({ callbackUrl: "/landing" })}
-                className="text-xs text-content-muted hover:text-content hidden sm:inline-flex"
+                className="text-xs text-content-muted hover:text-content"
               >
                 {dict.auth.signOut}
               </Button>
@@ -188,7 +190,7 @@ export function Header() {
           ) : null}
 
           {/* Desktop Language & Theme Toggles */}
-          <div className="hidden sm:flex items-center gap-1">
+          <div className={cn("items-center gap-1", isPublicLanding ? "hidden sm:flex" : "flex")}>
             <LanguageToggle />
             <ThemeToggle />
           </div>
@@ -199,7 +201,8 @@ export function Header() {
               type="button"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               className="md:hidden flex h-9 w-9 items-center justify-center rounded-md border border-line bg-surface text-content hover:bg-surface-muted transition-colors focus:outline-none"
-              aria-label={dict.actions.openMenu}
+              aria-label={isMobileMenuOpen ? dict.actions.closeMenu : dict.actions.openMenu}
+              aria-controls="mobile-navigation"
               aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
@@ -247,8 +250,8 @@ export function Header() {
 
       {/* Mobile Navigation Drawer */}
       {isPublicLanding && isMobileMenuOpen && (
-        <div className="md:hidden relative z-20 border-b border-line bg-surface/98 px-5 py-6 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-3">
+        <div id="mobile-navigation" className="md:hidden relative z-20 border-b border-line bg-surface/98 px-5 py-6 shadow-2xl backdrop-blur-2xl animate-in slide-in-from-top-2 duration-200">
+          <nav aria-label={dict.nav.primary} className="flex flex-col space-y-3">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (
@@ -283,12 +286,17 @@ export function Header() {
 
             {/* Auth / Preferences Controls */}
             <div className="flex items-center justify-between pt-1 text-sm">
-              <AuthEntryLink
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-medium text-content-muted hover:text-content"
-              >
-                {dict.auth.signIn}
-              </AuthEntryLink>
+              {status === "authenticated" ? (
+                <button type="button" onClick={() => void signOut({ callbackUrl: "/landing" })}
+                  className="font-medium text-content-muted hover:text-content">
+                  {dict.auth.signOut}
+                </button>
+              ) : (
+                <AuthEntryLink onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-medium text-content-muted hover:text-content">
+                  {dict.auth.signIn}
+                </AuthEntryLink>
+              )}
 
               <div className="flex items-center gap-2">
                 <LanguageToggle />

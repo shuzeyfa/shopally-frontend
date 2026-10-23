@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
 
 import { baseApi } from "./api/baseApi";
 import compareReducer from "./slices/compareSlice";
@@ -20,9 +19,6 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(baseApi.middleware),
   });
-
-  // Enables refetchOnFocus / refetchOnReconnect for endpoints that opt in.
-  setupListeners(store.dispatch);
 
   return store;
 };

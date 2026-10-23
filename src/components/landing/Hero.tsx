@@ -73,15 +73,15 @@ export function Hero() {
           <div className="flex flex-wrap items-center justify-center gap-6 pt-5 text-xs font-medium text-content-muted lg:justify-start border-t border-line/40">
             <div className="flex items-center gap-1.5">
               <span className="text-positive font-bold">✓</span>
-              <span>Live ETB FX Engine</span>
+              <span>{dict.landing.hero.liveFx}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-positive font-bold">✓</span>
-              <span>AliExpress Verified Stores</span>
+              <span>{dict.landing.hero.verifiedStores}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-positive font-bold">✓</span>
-              <span>English & አማርኛ</span>
+              <span>{dict.landing.hero.languages}</span>
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export function Hero() {
             <div className="absolute -top-2 left-0 sm:-left-4 z-20 flex items-center gap-2 rounded-xl border border-line bg-surface/90 px-3.5 py-2 shadow-xl backdrop-blur-md animate-float-delayed select-none">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping" />
               <span className="text-xs font-bold text-content">
-                AI Match 98.4%
+                {dict.landing.hero.aiMatch}
               </span>
               <span className="text-[11px] text-content-muted font-mono">
                 • 1 USD = 124.5 ETB
@@ -108,10 +108,10 @@ export function Hero() {
               <span className="text-base">🛡️</span>
               <div className="text-left">
                 <div className="text-[11px] font-bold text-content leading-tight">
-                  Verified Seller
+                  {dict.landing.hero.verifiedSeller}
                 </div>
                 <div className="text-[10px] text-positive font-semibold">
-                  99.2% Positive Feedback
+                  {dict.landing.hero.positiveFeedback}
                 </div>
               </div>
             </div>
@@ -121,10 +121,10 @@ export function Hero() {
               <span className="text-lg">🔥</span>
               <div className="text-left">
                 <div className="text-[11px] font-bold text-accent leading-tight">
-                  Price Drop Alert
+                  {dict.landing.hero.priceDrop}
                 </div>
                 <div className="text-xs font-extrabold text-content">
-                  Save 42% in ETB
+                  {dict.landing.hero.savings}
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ export function Hero() {
             <div className="relative z-10 w-full h-full flex items-center justify-center animate-float">
               <Image
                 src="/landing/cart.png"
-                alt="ShopAlly 3D Shopping Cart"
+                alt={dict.landing.hero.cartAlt}
                 width={480}
                 height={480}
                 priority

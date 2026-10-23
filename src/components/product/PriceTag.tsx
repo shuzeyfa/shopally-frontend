@@ -1,6 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/cn";
+import { formatMessage } from "@/lib/i18n/format";
+import { useLanguage } from "@/providers/LanguageProvider";
 import type { Price } from "@/types/product";
 
 interface PriceTagProps {
@@ -15,36 +17,34 @@ interface PriceTagProps {
  * accessible via a tooltip.
  */
 export function PriceTag({ price, className, size = "md" }: PriceTagProps) {
+  const { locale, dict } = useLanguage();
+  const numberLocale = locale === "am" ? "am-ET" : "en-ET";
   const formatETB = (amount: number) =>
-    new Intl.NumberFormat("en-ET", {
+    new Intl.NumberFormat(numberLocale, {
       style: "currency",
       currency: "ETB",
       maximumFractionDigits: 2,
     }).format(amount);
 
   const formatUSD = (amount: number) =>
-    new Intl.NumberFormat("en-US", {
+    new Intl.NumberFormat(locale === "am" ? "am-ET" : "en-US", {
       style: "currency",
       currency: "USD",
       maximumFractionDigits: 2,
     }).format(amount);
 
-  const formattedDate = price.fxTimestamp
-    ? new Date(price.fxTimestamp).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-    : "Live interbank rate";
-
-  const rateRatio =
-    price.usd > 0
-      ? (price.etb / price.usd).toFixed(2)
-      : null;
-
-  const tooltipText = `FX Rate applied: 1 USD = ~${rateRatio ?? "?"} ETB (${formattedDate})`;
+  const date = new Date(price.fxTimestamp);
+  const formattedDate = Number.isFinite(date.getTime())
+    ? new Intl.DateTimeFormat(numberLocale, {
+        year: "numeric", month: "short", day: "numeric",
+        hour: "2-digit", minute: "2-digit", timeZone: "UTC", timeZoneName: "short",
+      }).format(date)
+    : dict.product.fxUnknownDate;
+  const ratio = price.usd > 0 ? price.etb / price.usd : NaN;
+  const tooltipText = formatMessage(dict.product.fxApplied, {
+    rate: Number.isFinite(ratio) ? ratio.toFixed(2) : "?",
+    date: formattedDate,
+  });
 
   return (
     <div

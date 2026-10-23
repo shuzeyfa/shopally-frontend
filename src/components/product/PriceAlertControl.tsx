@@ -47,7 +47,7 @@ export function PriceAlertControl({ product }: { product: Product }) {
             />
           </label>
           <select
-            aria-label="Currency"
+            aria-label={dict.product.currency}
             className="h-9 rounded-md border border-line bg-surface-raised px-2 text-sm text-content"
             value={currency}
             onChange={(event) => {
@@ -65,7 +65,7 @@ export function PriceAlertControl({ product }: { product: Product }) {
           <button type="button" className={buttonClasses({ size: "sm" })} onClick={() => setOpen(false)}>
             {dict.priceAlerts.cancel}
           </button>
-          {isError && <p className="w-full text-xs text-danger" role="alert">{dict.priceAlerts.errorMessage}</p>}
+          {isError && <p className="w-full text-xs text-negative" role="alert">{dict.priceAlerts.errorMessage}</p>}
         </form>
       )}
     </div>

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:auth": "node --test tests/auth-flows.test.mjs"
+    "test:auth": "node --test tests/auth-flows.test.mjs",
+    "test:foundations": "node --test tests/foundations.test.mjs tests/preferences.test.mjs"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.13.0",

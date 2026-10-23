@@ -6,13 +6,13 @@ import { Button, buttonClasses } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { useGetSavedItemsQuery } from "@/lib/api/savedApi";
+import { localizedErrorMessage } from "@/lib/api/errors";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 export default function SavedPage() {
   const dict = useDictionary();
   const { data: items, isLoading, isError, error, refetch } = useGetSavedItemsQuery();
-  const errorMessage =
-    error && "message" in error ? error.message : dict.savedItems.errorMessage;
+  const errorMessage = localizedErrorMessage(error, dict, dict.savedItems.errorMessage);
 
   return (
     <div className="space-y-6">

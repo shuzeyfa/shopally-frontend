@@ -7,6 +7,7 @@ import { ProductGrid } from "@/components/product/ProductGrid";
 import { CompareBar } from "@/components/product/CompareBar";
 import { useSearchProductsQuery } from "@/lib/api/searchApi";
 import { useGetFXRateQuery } from "@/lib/api/fxApi";
+import { localizedErrorMessage } from "@/lib/api/errors";
 import { useDictionary } from "@/providers/LanguageProvider";
 
 const POPULAR_SUGGESTIONS = [
@@ -61,7 +62,7 @@ export default function SearchPage() {
         {fxData && (
           <div
             className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-xs text-content shadow-xs"
-            title={`Exchange rate calculated at ${new Date().toLocaleTimeString()}`}
+            title={dict.search.liveFx}
           >
             <span className="flex h-2 w-2 rounded-full bg-positive animate-pulse" />
             <span className="font-semibold text-accent">{dict.search.liveFx}:</span>
@@ -86,6 +87,7 @@ export default function SearchPage() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder={dict.search.placeholder}
+              aria-label={dict.search.button}
               className="w-full rounded-md border border-line bg-surface-muted pl-10 pr-4 py-2.5 text-sm text-content outline-none focus:border-accent transition-colors"
             />
             {inputValue && (
@@ -93,7 +95,7 @@ export default function SearchPage() {
                 type="button"
                 onClick={() => setInputValue("")}
                 className="absolute inset-y-0 right-0 flex items-center pr-3 text-content-muted hover:text-content"
-                aria-label="Clear search"
+                aria-label={dict.search.clear}
               >
                 ✕
               </button>
@@ -107,14 +109,14 @@ export default function SearchPage() {
         {/* Popular Searches */}
         <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs">
           <span className="text-content-muted">{dict.search.popularQueries}</span>
-          {POPULAR_SUGGESTIONS.map((term) => (
+          {POPULAR_SUGGESTIONS.map((term, index) => (
             <button
               key={term}
               type="button"
               onClick={() => handleSuggestionClick(term)}
               className="rounded-md border border-line bg-surface-muted px-2 py-0.5 text-content-muted hover:border-accent hover:text-accent transition-colors cursor-pointer"
             >
-              {term}
+              {dict.search.suggestions[index]}
             </button>
           ))}
         </div>
@@ -142,7 +144,7 @@ export default function SearchPage() {
           </div>
           <h2 className="text-lg font-semibold text-content">{dict.search.errorTitle}</h2>
           <p className="mt-1 text-sm text-content-muted max-w-md">
-            {error && "message" in error ? String(error.message) : dict.search.errorMessage}
+            {localizedErrorMessage(error, dict, dict.search.errorMessage)}
           </p>
           <Button
             type="button"

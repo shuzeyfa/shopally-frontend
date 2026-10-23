@@ -9,8 +9,7 @@ import type { Locale } from "@/lib/preferences";
  * rather than through a `t("nav.search")` lookup. That gives real autocomplete
  * and type checking, and needs no runtime path resolver.
  *
- * Scope is deliberately limited to what the app shell renders. Landing and
- * search copy arrives with those features.
+ * Shared UI labels, accessibility text, and feature copy use this same shape.
  */
 const en = {
   app: {
@@ -31,10 +30,6 @@ const en = {
     welcomeTitle: "Sign in to ShopAlly",
     welcomeSubtitle: "Connect your account to access AI product search, price alerts, and saved items.",
     signInWithGoogle: "Continue with Google",
-    orDemo: "Or continue with demo account",
-    emailPlaceholder: "Email address",
-    namePlaceholder: "Your name",
-    demoSignInButton: "Sign in with Demo Account",
     backToHome: "Back to home",
   },
   search: {
@@ -54,6 +49,8 @@ const en = {
     viewOnAliExpress: "View on AliExpress",
     liveFx: "Live FX",
     popularQueries: "Popular searches:",
+    clear: "Clear search",
+    suggestions: ["smartphone", "wireless headphones", "smartwatch", "mechanical keyboard", "usb c hub"],
   },
   compare: {
     title: "Product Comparison",
@@ -70,6 +67,11 @@ const en = {
     maxReached: "Maximum 4 items can be compared",
     bestValue: "Best Value",
     highestRating: "Highest Rating",
+    attributes: {
+      price_etb: "Price (ETB)", price_usd: "Price (USD)", ai_match: "AI match score",
+      rating: "Customer rating", seller_score: "Seller reputation",
+      delivery: "Delivery estimate", highlights: "Key highlights",
+    },
   },
   savedItems: {
     subtitle: "Keep products you are considering in one place, across your devices.",
@@ -116,6 +118,7 @@ const en = {
     toggleLanguage: "Switch language",
     goHome: "Back to home",
     openMenu: "Open menu",
+    closeMenu: "Close menu",
   },
   theme: {
     light: "Light",
@@ -130,6 +133,25 @@ const en = {
     ok: "Connected",
     degraded: "Degraded",
     unreachable: "Unreachable",
+  },
+  errors: {
+    NETWORK_ERROR: "Could not connect. Check your connection and try again.",
+    INVALID_RESPONSE: "Could not read the server response. Please try again.",
+    TIMEOUT: "The request took too long. Please try again.",
+    INVALID_INPUT: "Check the information you entered and try again.",
+    UNAUTHORIZED: "Please sign in again to continue.",
+    FORBIDDEN: "You do not have access to this item.",
+    NOT_FOUND: "This item could not be found.",
+    FX_UNAVAILABLE: "Currency conversion is temporarily unavailable.",
+    SERVICE_UNAVAILABLE: "This service is temporarily unavailable. Please try again.",
+    INTERNAL_SERVER_ERROR: "Something went wrong. Please try again."
+  },
+  product: {
+    fallbackTitle: "AliExpress product",
+    aiMatch: "AI match score: {percentage}%",
+    fxApplied: "FX rate applied: 1 USD ≈ {rate} ETB ({date})",
+    fxUnknownDate: "Rate date unavailable",
+    currency: "Currency"
   },
   notFound: {
     title: "Page not found",
@@ -156,6 +178,15 @@ const en = {
       exploreDeals: "Explore deals",
       watchDemo: "Watch Demo",
       badge: "AI-Powered Shopping Assistant",
+      liveFx: "Live ETB FX Engine",
+      verifiedStores: "AliExpress Verified Stores",
+      languages: "English & አማርኛ",
+      aiMatch: "AI Match 98.4%",
+      verifiedSeller: "Verified Seller",
+      positiveFeedback: "99.2% Positive Feedback",
+      priceDrop: "Price Drop Alert",
+      savings: "Save 42% in ETB",
+      cartAlt: "ShopAlly shopping cart",
       mockCard: {
         matchScore: "94% AI Match",
         title: "Wireless ANC Noise Cancelling Headphones",
@@ -203,6 +234,8 @@ const en = {
     },
     demo: {
       title: "ShopAlly in Action",
+      titleHighlight: "in Action",
+      videoLabel: "ShopAlly demonstration video",
       subtitle: "Affordable shopping made simple",
     },
     testimonials: {
@@ -268,6 +301,8 @@ const en = {
   },
   footer: {
     rights: "All rights reserved.",
+    quickLinks: "Quick links",
+    about: "About",
   },
 };
 
@@ -303,10 +338,6 @@ const am: Dictionary = {
     welcomeTitle: "ወደ ሾፓሊ ይግቡ",
     welcomeSubtitle: "የ AI ምርት ፍለጋን፣ የዋጋ ማሳወቂያዎችን እና የተቀመጡ ዕቃዎችን ለማግኘት መለያዎን ያገናኙ።",
     signInWithGoogle: "በ Google ይቀጥሉ",
-    orDemo: "ወይም በሙከራ መለያ ይቀጥሉ",
-    emailPlaceholder: "የኢሜይል አድራሻ",
-    namePlaceholder: "ስምዎ",
-    demoSignInButton: "በሙከራ መለያ ይግቡ",
     backToHome: "ወደ መነሻ ገጽ ተመለስ",
   },
   search: {
@@ -326,6 +357,8 @@ const am: Dictionary = {
     viewOnAliExpress: "በአሊኤክስፕረስ ይመልከቱ",
     liveFx: "የቀጥታ ምንዛሪ",
     popularQueries: "ተወዳጅ ፍለጋዎች:",
+    clear: "ፍለጋውን አጽዳ",
+    suggestions: ["ስማርትፎን", "ገመድ አልባ የጆሮ ማዳመጫ", "ስማርት ሰዓት", "ሜካኒካል የቁልፍ ሰሌዳ", "የዩኤስቢ ሲ ማስፋፊያ"],
   },
   compare: {
     title: "የምርቶች ማወዳደሪያ",
@@ -342,6 +375,11 @@ const am: Dictionary = {
     maxReached: "እስከ 4 ዕቃዎች ብቻ ማወዳደር ይቻላል",
     bestValue: "ምርጥ ዋጋ",
     highestRating: "ከፍተኛ ደረጃ",
+    attributes: {
+      price_etb: "ዋጋ (ብር)", price_usd: "ዋጋ (ዶላር)", ai_match: "የ AI ተዛማጅነት",
+      rating: "የደንበኛ ደረጃ", seller_score: "የሻጭ ታማኝነት",
+      delivery: "የማድረሻ ግምት", highlights: "ዋና ዋና ባህሪያት",
+    },
   },
   savedItems: {
     subtitle: "ሊገዙዋቸው ያሰቡዋቸውን ምርቶች በአንድ ቦታ ላይ ያስቀምጡ።",
@@ -388,6 +426,7 @@ const am: Dictionary = {
     toggleLanguage: "ቋንቋ ይቀይሩ",
     goHome: "ወደ መነሻ ይመለሱ",
     openMenu: "ምናሌ ይክፈቱ",
+    closeMenu: "ምናሌ ይዝጉ",
   },
   theme: {
     light: "ብርሃን",
@@ -402,6 +441,25 @@ const am: Dictionary = {
     ok: "ተገናኝቷል",
     degraded: "በከፊል ይሰራል",
     unreachable: "አይገኝም",
+  },
+  errors: {
+    NETWORK_ERROR: "መገናኘት አልተቻለም። ግንኙነትዎን ፈትሸው እንደገና ይሞክሩ።",
+    INVALID_RESPONSE: "የአገልጋዩን ምላሽ ማንበብ አልተቻለም። እንደገና ይሞክሩ።",
+    TIMEOUT: "ጥያቄው ከሚጠበቀው በላይ ጊዜ ወስዷል። እንደገና ይሞክሩ።",
+    INVALID_INPUT: "ያስገቡትን መረጃ ፈትሸው እንደገና ይሞክሩ።",
+    UNAUTHORIZED: "ለመቀጠል እንደገና ይግቡ።",
+    FORBIDDEN: "ይህን ዕቃ ለማየት ፈቃድ የለዎትም።",
+    NOT_FOUND: "ይህ ዕቃ አልተገኘም።",
+    FX_UNAVAILABLE: "የምንዛሪ ልወጣ ለጊዜው አይገኝም።",
+    SERVICE_UNAVAILABLE: "አገልግሎቱ ለጊዜው አይገኝም። እንደገና ይሞክሩ።",
+    INTERNAL_SERVER_ERROR: "ችግር ተፈጥሯል። እንደገና ይሞክሩ።"
+  },
+  product: {
+    fallbackTitle: "የአሊኤክስፕረስ ምርት",
+    aiMatch: "የ AI ተዛማጅነት ደረጃ፦ {percentage}%",
+    fxApplied: "የተጠቀመው የምንዛሪ ተመን፦ 1 USD ≈ {rate} ETB ({date})",
+    fxUnknownDate: "የተመኑ ቀን አይገኝም",
+    currency: "ምንዛሪ"
   },
   notFound: {
     title: "ገጹ አልተገኘም",
@@ -428,6 +486,15 @@ const am: Dictionary = {
       exploreDeals: "ቅናሾችን ይመልከቱ",
       watchDemo: "ማሳያውን ይመልከቱ",
       badge: "በ AI የተደገፈ የግዢ ረዳት",
+      liveFx: "የቀጥታ የብር ምንዛሪ",
+      verifiedStores: "የተረጋገጡ የአሊኤክስፕረስ መደብሮች",
+      languages: "እንግሊዝኛ እና አማርኛ",
+      aiMatch: "የ AI ተዛማጅነት 98.4%",
+      verifiedSeller: "የተረጋገጠ ሻጭ",
+      positiveFeedback: "99.2% አዎንታዊ ግብረመልስ",
+      priceDrop: "የዋጋ ቅናሽ ማሳወቂያ",
+      savings: "በብር 42% ይቆጥቡ",
+      cartAlt: "የሾፓሊ የግዢ ጋሪ",
       mockCard: {
         matchScore: "94% AI ተዛማጅነት",
         title: "ገመድ አልባ ጫጫታ የሚቀንስ የጆሮ ማዳመጫ",
@@ -475,6 +542,8 @@ const am: Dictionary = {
     },
     demo: {
       title: "ሾፓሊ በተግባር",
+      titleHighlight: "በተግባር",
+      videoLabel: "የሾፓሊ ማሳያ ቪዲዮ",
       subtitle: "ተመጣጣኝ እና ቀላል ግዢ",
     },
     testimonials: {
@@ -540,6 +609,8 @@ const am: Dictionary = {
   },
   footer: {
     rights: "መብቱ በሕግ የተጠበቀ ነው።",
+    quickLinks: "ፈጣን አገናኞች",
+    about: "ስለ ሾፓሊ",
   },
 };
 
