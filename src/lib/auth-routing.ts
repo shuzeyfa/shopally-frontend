@@ -24,3 +24,8 @@ export function safeCallbackPath(value: string | null | undefined, origin = "htt
 export function loginHref(callbackUrl?: string | null): string {
   return `/login?${new URLSearchParams({ callbackUrl: safeCallbackPath(callbackUrl) })}`;
 }
+
+/** Shared by the session callback and route guard. */
+export function isAuthSubject(value: unknown): value is string {
+  return typeof value === "string" && value.trim().length > 0 && !value.startsWith("demo-");
+}

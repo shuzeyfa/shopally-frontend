@@ -4,8 +4,9 @@ import { createServer } from "node:net";
 import { once } from "node:events";
 import { setTimeout as delay } from "node:timers/promises";
 
-export async function startProductionServer() {
+export async function startProductionServer(envOverrides = {}) {
   const secret = randomBytes(32).toString("hex");
+  const apiSecret = randomBytes(32).toString("hex");
   const reservation = createServer();
   reservation.listen(0, "127.0.0.1");
   await once(reservation, "listening");
@@ -19,8 +20,9 @@ export async function startProductionServer() {
     windowsHide: true, stdio: ["ignore", "pipe", "pipe"],
     env: {
       ...process.env, NODE_ENV: "production", NEXTAUTH_URL: origin,
-      NEXTAUTH_SECRET: secret, AUTH_JWT_SECRET: secret,
+      NEXTAUTH_SECRET: secret, AUTH_JWT_SECRET: apiSecret,
       GOOGLE_CLIENT_ID: "test-client-id", GOOGLE_CLIENT_SECRET: "test-client-secret",
+      ...envOverrides,
     },
   });
   const capture = (chunk) => { logs = (logs + chunk).slice(-4000); };
@@ -41,7 +43,7 @@ export async function startProductionServer() {
       if (server.exitCode !== null) throw new Error(`Test server exited: ${logs}`);
       try {
         const response = await fetch(`${origin}/api/auth/providers`, { signal: AbortSignal.timeout(1000) });
-        if (response.ok) return { origin, secret, stop };
+        if (response.ok) return { origin, secret, apiSecret, stop };
       } catch { /* Server is starting. */ }
       await delay(200);
     }

@@ -41,16 +41,30 @@ function GoogleIcon() {
  *
  * Google OAuth is the only sign-in method; email ownership is verified by Google.
  */
-export function SigninForm() {
+export function SigninForm({ initialCallbackUrl }: { initialCallbackUrl?: string }) {
   const dict = useDictionary();
   const searchParams = useSearchParams();
-  const callbackUrl = safeCallbackPath(searchParams.get("callbackUrl"));
+  const callbackUrl = safeCallbackPath(searchParams.get("callbackUrl") ?? initialCallbackUrl);
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [requestFailed, setRequestFailed] = useState(false);
+  const oauthError = searchParams.get("error");
+  const errorMessage = requestFailed ? dict.auth.connectionError
+    : oauthError === "AccessDenied" ? dict.auth.accessDenied
+    : oauthError === "Configuration" ? dict.auth.unavailable
+    : oauthError ? dict.auth.signInError : null;
+
   const handleGoogleSignIn = async () => {
+    setRequestFailed(false);
     setIsLoading(true);
-    await signIn("google", { callbackUrl });
+    try {
+      await signIn("google", { callbackUrl });
+    } catch {
+      setRequestFailed(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -71,15 +85,21 @@ export function SigninForm() {
       </div>
 
       <div className="space-y-4">
+        {errorMessage && (
+          <p role="alert" className="rounded-md border border-line bg-surface-muted p-3 text-sm text-content">
+            {errorMessage}
+          </p>
+        )}
         <Button
           type="button"
           variant="outline"
           className="w-full py-5 text-base font-medium shadow-sm hover:border-accent"
           onClick={handleGoogleSignIn}
           disabled={isLoading}
+          aria-busy={isLoading}
         >
           <GoogleIcon />
-          <span>{dict.auth.signInWithGoogle}</span>
+          <span>{isLoading ? dict.auth.connecting : dict.auth.signInWithGoogle}</span>
         </Button>
       </div>
 

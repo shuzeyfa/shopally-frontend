@@ -21,14 +21,12 @@ export function Providers({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
-      <StoreProvider>
-        <ThemeProvider initialTheme={initialTheme}>
-          <LanguageProvider initialLocale={initialLocale}>
-            {children}
-          </LanguageProvider>
-        </ThemeProvider>
-      </StoreProvider>
-    </AuthProvider>
+    <ThemeProvider initialTheme={initialTheme}>
+      <LanguageProvider initialLocale={initialLocale}>
+        <AuthProvider>
+          <StoreProvider>{children}</StoreProvider>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }

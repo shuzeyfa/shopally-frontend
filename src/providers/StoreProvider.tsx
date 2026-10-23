@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { Provider } from "react-redux";
+import { useSession } from "next-auth/react";
 
 import { makeStore } from "@/lib/store";
 
@@ -17,6 +18,14 @@ import { makeStore } from "@/lib/store";
  * would be shared across every user's request.
  */
 export function StoreProvider({ children }: { children: React.ReactNode }) {
+  const { data: session } = useSession();
+  // Changing accounts remounts the store before children can read old private
+  // data. Late responses still belong to the discarded store, not the new one.
+  const identity = session?.user?.id ? "user:" + session.user.id : "anonymous";
+  return <AccountStore key={identity}>{children}</AccountStore>;
+}
+
+function AccountStore({ children }: { children: React.ReactNode }) {
   const [store] = useState(makeStore);
 
   // Register browser listeners only after mount; dispose them on unmount.

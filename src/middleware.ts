@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { isAppPath, safeCallbackPath } from "@/lib/auth-routing";
+import { isAppPath, isAuthSubject, safeCallbackPath } from "@/lib/auth-routing";
 
 /**
  * Middleware that guards protected application routes.
@@ -15,7 +15,7 @@ import { isAppPath, safeCallbackPath } from "@/lib/auth-routing";
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-  const isAuthenticated = Boolean(token?.sub && !token.sub.startsWith("demo-"));
+  const isAuthenticated = isAuthSubject(token?.sub);
 
   // Root redirect
   if (pathname === "/") {

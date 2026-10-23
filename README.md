@@ -154,3 +154,26 @@ The API transport rejects malformed envelopes with `INVALID_RESPONSE` and
 bounds backend requests to 30 seconds. Shared UI errors are selected by code
 from the active dictionary; provider messages do not override the UI language.
 Redux browser listeners are attached after mount and removed on unmount.
+
+### Session and API-token lifecycle
+
+Google sign-in requires a verified Google email. Register both the local and
+production origins' `/api/auth/callback/google` redirect URIs in Google's web
+OAuth client. NextAuth handles OAuth state, PKCE and encrypted session cookies.
+Set `NEXTAUTH_SECRET` for session encryption and a dedicated `AUTH_JWT_SECRET`
+of at least 32 UTF-8 bytes, identical on Vercel and the Go host. There is no
+fallback between these secrets; build success does not validate deployment values.
+
+On each session read, the server verifies the separate HS256 API token. Missing,
+expired, mismatched or rotated-key tokens are replaced; tokens within five
+minutes of expiration are renewed. Tokens last 24 hours and use the verified
+NextAuth subject, never client-supplied session-update fields. The browser
+refreshes its session every five minutes while online and on window focus;
+protected API requests also read the session before attaching a token.
+
+Account changes recreate Redux state, so previous saved items, alerts and late
+responses cannot enter the next account's store. Open app pages hide their
+contents when the session ends and return to login with the destination intact.
+Sign-in errors show translated retry guidance without raw provider details.
+The normal NextAuth sign-out clears the session; already-issued bearer tokens
+remain valid until their expiry (no server-side token revocation store).
