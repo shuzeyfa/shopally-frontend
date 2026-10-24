@@ -51,7 +51,16 @@ test("network failures and hanging requests become actionable errors", { timeout
   const hanging = createEnvelopeBaseQuery({
     baseUrl: "https://api.example.test", timeout: 20,
     fetchFn: async (request) => new Promise((_, reject) => {
-      const abort = () => reject(request.signal.reason);
+      // Unlike a real fetch, this mock has no socket keeping Node alive.
+      // Keep it pending until the abort, and fail if that abort never arrives.
+      const deadline = setTimeout(() => {
+        request.signal.removeEventListener("abort", abort);
+        reject(new Error("The hanging request did not receive a timeout abort"));
+      }, 1000);
+      const abort = () => {
+        clearTimeout(deadline);
+        reject(request.signal.reason);
+      };
       if (request.signal.aborted) abort();
       else request.signal.addEventListener("abort", abort, { once: true });
     }),
